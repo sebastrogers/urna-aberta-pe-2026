@@ -10,6 +10,7 @@ Guia interativo dos candidatos a **governador** e **senador** de Pernambuco nas 
 - Espectro político aproximado (estimativa editorial a partir de partido, alianças e posições públicas)
 - Urna simulada: digite o número do candidato para abrir a ficha
 - Tendência das pesquisas Quaest e Datafolha registradas no TSE
+- Deputados federais: 37 nomes (atuais, ex-deputados e competitivos) com emendas pagas, áreas e link para cada emenda no Portal da Transparência
 - Links dos debates de governador e Senado
 - Tema claro e escuro
 - Fotos oficiais dos candidatos (TSE e Agência Senado)
