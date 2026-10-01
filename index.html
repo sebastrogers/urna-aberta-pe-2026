@@ -13,6 +13,8 @@
 <title>Urna Aberta PE 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap">
+<button type="button" id="srcfab" class="srcfab" aria-haspopup="dialog"><span aria-hidden="true">ⓘ</span><span class="srcfab-t">Fontes dos dados</span></button>
+<div id="srcdlg" class="shmask srcm" hidden><div class="srcbox" role="dialog" aria-modal="true" aria-label="De onde essas informações foram coletadas"><button type="button" id="srcx" class="srcx" aria-label="Fechar">✕</button><div id="srcbody"></div></div></div>
 <div id="share" class="shmask" hidden><div class="shbox" role="dialog" aria-modal="true" aria-label="Compartilhar"><div class="shh"><b>Compartilhar</b><button type="button" id="shx" aria-label="Fechar">✕</button></div><div class="shg"><a id="sh-wa" target="_blank" rel="noopener">WhatsApp</a><a id="sh-tg" target="_blank" rel="noopener">Telegram</a><a id="sh-x" target="_blank" rel="noopener">X</a><a id="sh-fb" target="_blank" rel="noopener">Facebook</a><button type="button" id="sh-nat">Mais opções</button><button type="button" id="sh-cp">Copiar link</button></div><p class="cnote" id="sh-msg" style="margin:8px 0 0"></p></div></div>
 <script>try{var t=localStorage.getItem("pe26theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
@@ -320,6 +322,13 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
 .lnk{display:inline-block;padding:12px 4px;min-height:44px;box-sizing:border-box}
 .shg a,.shg button{min-height:44px;box-sizing:border-box;display:flex;align-items:center;justify-content:center}.shh button{min-width:44px;min-height:44px}
 @media (min-width:561px) and (max-width:1180px){nav.tabs{flex-wrap:wrap;overflow:visible;position:static}}
+.srcfab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font:600 14px var(--sans);box-shadow:0 6px 20px rgba(0,0,0,.22);cursor:pointer}
+.srcfab:hover{border-color:var(--accent)}
+@media(max-width:480px){.srcfab{padding:0;width:48px;height:48px;justify-content:center;font-size:20px}.srcfab-t{display:none}}
+.srcm{align-items:flex-end;justify-content:flex-end;overflow:auto}
+.srcbox{position:relative;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:20px 18px 18px;width:min(560px,100%);max-height:calc(100dvh - 32px);overflow:auto}
+.srcx{position:sticky;top:0;float:right;min-width:44px;min-height:44px;border:0;background:var(--surface);color:var(--ink);border-radius:50%;font-size:18px;cursor:pointer}
+@media(max-width:560px){.srcm{padding:0}.srcbox{width:100%;border-radius:16px 16px 0 0;max-height:88dvh}}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -378,7 +387,6 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
   <button class="tab" role="tab" data-office="pol" aria-selected="false">Pesquisas</button>
   <button class="tab" role="tab" data-office="deb" aria-selected="false">Debates</button>
 </nav>
-<p class="srclink"><button type="button" class="lnk" data-go="src">ⓘ Veja de onde essas informações foram coletadas</button></p>
 
 <main>
   <section class="block" id="sec-spec">
@@ -1374,7 +1382,7 @@ function obsDE(d,raw){
 function setOffice(o){office=o;
  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.office===o));
  const cand=o==="gov"||o==="sen";["#sec-spec","#sec-map","#sec-list","#sec-detail"].forEach(s=>$(s).hidden=!cand);
- $("#sec-polls").hidden=o!=="pol";$("#sec-deb").hidden=o!=="deb";$("#sec-df").hidden=o!=="df";if(o==="df"){renderDf();mapRender("df")}$("#sec-de").hidden=o!=="de";$("#sec-mun").hidden=o!=="mun";$("#sec-cmp").hidden=o!=="cmp";$("#sec-inst").hidden=o!=="inst";$("#sec-src").hidden=o!=="src";if(o==="inst")renderInst();if(o==="cmp")renderCmp();if(o==="mun")renderMun();if(o==="de"){renderDe();mapRender("de")}
+ $("#sec-polls").hidden=o!=="pol";$("#sec-deb").hidden=o!=="deb";$("#sec-df").hidden=o!=="df";if(o==="df"){renderDf();mapRender("df")}$("#sec-de").hidden=o!=="de";$("#sec-mun").hidden=o!=="mun";$("#sec-cmp").hidden=o!=="cmp";$("#sec-inst").hidden=o!=="inst";if(o==="inst")renderInst();if(o==="cmp")renderCmp();if(o==="mun")renderMun();if(o==="de"){renderDe();mapRender("de")}
  if(cand){sel=null;dtab="perfil";renderGrid();renderDetail();mapRender("gs")}
  if(o==="pol")renderPolls();if(o==="deb")renderDebates();
  try{localStorage.setItem("pe26tab",o)}catch(e){}
@@ -1383,7 +1391,7 @@ function setOffice(o){office=o;
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setOffice(t.dataset.office));
 ["#q","#sp","#mand"].forEach(s=>$(s).addEventListener("input",renderGrid));
 let rT,lastW=innerWidth;addEventListener("resize",()=>{clearTimeout(rT);rT=setTimeout(()=>{if(Math.abs(innerWidth-lastW)<40)return;lastW=innerWidth;if(office==="pol")renderPolls();if(office==="gov"||office==="sen"){renderGrid();mapRender("gs")}if(office==="df"||office==="de")mapRender(office)},150)});
-let start="gov";const h=location.hash.slice(1);const HM={governador:"gov",senado:"sen",pesquisas:"pol",debates:"deb",deputados:"df",estaduais:"de",cidade:"mun",comparar:"cmp",instituicoes:"inst",fontes:"src"};
+let start="gov";const h=location.hash.slice(1);const HM={governador:"gov",senado:"sen",pesquisas:"pol",debates:"deb",deputados:"df",estaduais:"de",cidade:"mun",comparar:"cmp",instituicoes:"inst"};
 if(HM[h])start=HM[h];else{try{start=localStorage.getItem("pe26tab")||"gov"}catch(e){}}
 if(!["gov","sen","pol","deb","df","de","mun","cmp","inst","src"].includes(start))start="gov";
 setOffice(start);
@@ -1427,8 +1435,15 @@ setOffice(start);
   if(navigator.clipboard)navigator.clipboard.writeText(u).then(ok,()=>$("#sh-msg").textContent=u);else $("#sh-msg").textContent=u};
 })();
 
-(function(){let prev="gov";const go=()=>{if(office!=="src")prev=office;setOffice("src");scrollTo({top:0,behavior:"smooth"})};
-document.querySelectorAll("[data-go=src]").forEach(b=>b.onclick=go);$("#srcback").onclick=()=>{setOffice(prev);scrollTo({top:0})}})();
+
+
+(function(){const m=$("#srcdlg"),b=$("#srcbody");b.innerHTML=$("#sec-src").innerHTML;$("#sec-src").remove();
+ const bk=b.querySelector("#srcback");if(bk)bk.remove();
+ function open(){m.hidden=false;$("#srcx").focus();m.scrollTop=0}function close(){m.hidden=true;$("#srcfab").focus()}
+ $("#srcfab").onclick=open;$("#srcx").onclick=close;m.addEventListener("click",e=>{if(e.target===m)close()});
+ addEventListener("keydown",e=>{if(e.key==="Escape"&&!m.hidden)close()});
+ document.querySelectorAll("[data-go=src]").forEach(x=>x.onclick=open);
+ if(location.hash==="#fontes")open();})();
 </script>
 
 </body>
