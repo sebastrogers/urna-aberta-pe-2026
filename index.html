@@ -227,6 +227,15 @@ th{font-weight:600;color:var(--ink-3)}
 .rvrank{background:var(--sunk);border-radius:12px;padding:12px 14px;display:grid;gap:6px}.rvrank ol{margin:0;padding-left:20px;display:grid;gap:4px}.rvrank li{font-size:14px}.rvrank li button{border:0;background:none;padding:0;font:600 14px var(--body,inherit);color:var(--ink);text-decoration:underline;cursor:pointer}.rvrank li span{color:var(--ink-3);margin-left:8px;font-size:12.5px}
 .rvleg{border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13.5px}.rvleg summary{cursor:pointer;font-weight:700}.rvleg ul{margin:10px 0 0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2)}
 .mapp{padding:18px;display:grid;gap:10px}
+.tiles2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px;margin-bottom:14px}
+.tile{background:var(--sunk);border-radius:14px;padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}.tile.wide{grid-column:span 2}@media (max-width:560px){.tile.wide{grid-column:auto}}
+.tl{font:700 11px/1.2 var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.tv{font:800 24px/1.1 var(--display);font-stretch:85%;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.tile small{font-size:12.5px;color:var(--ink-3);line-height:1.35}
+.tb{position:relative;height:12px;background:var(--surface);border-radius:6px}.tb i{display:block;height:100%;background:var(--accent);border-radius:6px}.tb u{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--ink);border-radius:2px;text-decoration:none}
+.ts{display:flex;height:16px;border-radius:8px;overflow:hidden;gap:2px;background:var(--surface)}.ts i{display:block;height:100%}
+.tg{list-style:none;padding:0!important;margin:0;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--ink-2)}.tg li{display:flex;align-items:center;gap:6px}.tg li span{width:10px;height:10px;border-radius:3px;flex:none}.tg b{font-variant-numeric:tabular-nums}
+.tchips{display:flex;flex-wrap:wrap;gap:6px}.tchips span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12.5px;font-weight:600}
+.cdot{width:12px;height:12px;border-radius:50%;background:var(--accent);display:inline-block;flex:none}.cdot.warn{background:#e0a800}
 .obs{list-style:none;padding:0!important;margin:0;display:grid;gap:0}.obs li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) auto;gap:6px 16px;padding:11px 0;border-top:1px solid var(--line);align-items:start}.obs li:first-child{border-top:0}
 .obs .ok{font-weight:600;font-size:14px}.obs .ov{font-size:14px;display:grid;gap:2px;font-weight:600}.obs .ov small{font-weight:400;color:var(--ink-3);font-size:12.5px}.obs .os{font-size:11.5px;color:var(--ink-3);text-align:right;max-width:130px}
 @media (max-width:640px){.obs li{grid-template-columns:1fr}.obs .os{text-align:left;max-width:none}}
@@ -851,7 +860,7 @@ function renderDetail(){
   const T=[["perfil","Perfil"],["obs","Pontos observáveis"],["prop","Propostas"],["hist","O que já fez"],["cases","Escândalos e processos"+(c.cases.length?" ("+c.cases.length+")":"")],["src","Fontes"]];
   let body="";
   if(dtab==="perfil")body=`<dl class="facts"><div><dt class="label">${c.o==="gov"?"Vice":"Suplentes"}</dt><dd>${esc(c.vice.replace("Suplentes: ",""))}</dd></div><div><dt class="label">Profissão</dt><dd>${esc(c.prof)}</dd></div><div><dt class="label">Coligação</dt><dd>${esc(c.col)}</dd></div><div><dt class="label">Espectro estimado</dt><dd>${esc(c.spl)}</dd></div></dl><ul>${c.perfil.map(p=>"<li>"+esc(p)+"</li>").join("")}</ul>`;
-  if(dtab==="obs")body=obsGS(c);
+  if(dtab==="obs")body=vizGS(c);
   if(dtab==="prop")body="<ul>"+c.prop.map(([a,t])=>`<li><b>${esc(a)}.</b> ${esc(t)}</li>`).join("")+"</ul>";
   if(dtab==="hist")body="<ul>"+c.hist.map(h=>"<li>"+esc(h)+"</li>").join("")+"</ul>";
   if(dtab==="cases")body=c.cases.length?c.cases.map(k=>`<div class="case${k.closed?" closed":""}"><span class="status${k.closed?" closed":""}">${esc(k.st)}</span><h4>${esc(k.t)}</h4><p>${esc(k.d)}</p><div class="src">${k.s.map(s=>`<a href="${S[s][1]}" target="_blank" rel="noopener">${esc(S[s][0])}</a>`).join(" · ")}</div></div>`).join(""):'<p class="none">Nenhuma investigação, processo ou escândalo relevante encontrado nas fontes consultadas.</p>';
@@ -939,7 +948,7 @@ function renderDfDetail(){
   const T=[["perfil","Perfil"],["obs","Pontos observáveis"],["emendas","Emendas e dinheiro"],["atuacao","Atuação"],["cases","Escândalos e processos"+(d.cases.length?" ("+d.cases.length+")":"")],["src","Fontes"]];
   let body="";
   if(dfTab==="perfil")body=`<dl class="facts"><div><dt class="label">Situação</dt><dd>${TIER[d.tier]}</dd></div><div><dt class="label">Profissão declarada</dt><dd>${esc(d.prof)}</dd></div><div><dt class="label">Bens declarados</dt><dd>${d.bens?brl(d.bens):"Nenhum bem declarado"}</dd></div><div><dt class="label">Espectro estimado</dt><dd>${esc(d.spl)}</dd></div></dl><p><b>Cargos:</b> ${esc(d.cargos)}</p>`;
-  if(dfTab==="obs")body=obsDF(d);
+  if(dfTab==="obs")body=vizDF(d);
   if(dfTab==="emendas"){
     if(!d.em)body=`<p class="none">${d.tier==="comp"?"Nunca foi deputado federal, então não indicou emendas ao Orçamento da União.":"Sem emendas registradas no Portal da Transparência no período disponível (desde 2015)."}</p>`;
     else{const e=d.em,ys=Object.entries(e[4]),ym=Math.max(...ys.map(y=>y[1])),ft=e[5].reduce((s,f)=>s+f[1],0);
@@ -993,7 +1002,7 @@ function renderDeDetail(){
   const sit=d.cand?"Candidato(a) à reeleição para deputado estadual":(d.outra?"Disputa outro cargo: "+d.outra:"Não aparece como candidato(a) a deputado estadual no TSE (consulta em 1º/10/2026)");
   if(deTab==="perfil")body=`<dl class="facts"><div><dt class="label">Situação em 2026</dt><dd>${esc(sit)}</dd></div><div><dt class="label">Mandato</dt><dd>Deputado estadual (Alepe), legislatura 2023–2026</dd></div><div><dt class="label">Bens declarados</dt><dd>${d.bens?mi(d.bens):"Sem declaração no registro de 2026"}</dd></div><div><dt class="label">Espectro estimado (pelo partido)</dt><dd>${esc(d.spl)}</dd></div>${d.v22?`<div><dt class="label">Votos em 2022</dt><dd>${d.v22[0].toLocaleString("pt-BR")} votos; maior base em ${esc(d.v22[1])}</dd></div>`:""}<div><dt class="label">Gabinete (ago/2026)</dt><dd>${d.gab[0]} pessoas · custo de tabela ~R$ ${d.gab[1]} mil/mês</dd></div></dl>
    ${d.v22?`<p class="cnote">Deputado estadual é eleito pelo estado inteiro. Regiões com mais votos em 2022: ${d.v22[3].map(r=>esc(r[0])+" ("+r[1].toLocaleString("pt-BR")+")").join(", ")}. Onde teve voto não é, necessariamente, a região que ele representa.</p>`:""}`;
-  if(deTab==="obs")body=obsDE(d);
+  if(deTab==="obs")body=vizDE(d);
   if(deTab==="emendas"){
     if(!d.em)body='<p class="none">Nenhuma emenda com autoria confirmada e execução registrada nos dados abertos da Alepe e do Portal da Transparência de PE. Isso pode significar que não há emendas ou apenas que a autoria não foi confirmada.</p>';
     else{const e=d.em,ym=Math.max(...e[3].map(y=>y[1]),.01),rt=e[4].reduce((s,r)=>s+r[1],0)||1,ut=e[6].reduce((s,r)=>s+r[1],0)||1;
@@ -1105,6 +1114,63 @@ function mapRender(k){
   host.querySelectorAll(".rva").forEach(g=>{const f=()=>{st.a=st.a===+g.dataset.i?null:+g.dataset.i;mapRender(k)};g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
   host.querySelectorAll(".rvd").forEach(g=>{const f=()=>M.pick(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
   host.querySelectorAll(".rvrank button").forEach(b=>b.onclick=()=>M.pick(b.dataset.id));
+}
+/* ===== pontos observáveis visuais ===== */
+const SEG=["#16834a","#d9822b","#2758a8","#b0425f","#7a7d86","#c9a227"];
+const GRY="#9aa0a6",segCol=(n,i,u)=>/^(Demais|Sem tema|Outras)/.test(n)?GRY:SEG[u[i]];
+const pc=(a,t)=>t?Math.round(a/t*100):0;
+const fm1=x=>x.toFixed(1).replace(".",",");
+function tBar(label,disp,val,max,avg,avgDisp,cap){const w=Math.max(1.5,Math.min(100,val/max*100)),a=avg!=null?Math.min(100,avg/max*100):null;const rel=avg==null?"":(Math.abs(val-avg)<=Math.max(avg*.1,1e-4)?"≈ média":val>avg?"▲ acima da média":"▼ abaixo da média");return `<div class="tile"><span class="tl">${label}</span><b class="tv">${disp}</b><div class="tb"><i style="width:${w}%"></i>${a!=null?`<u style="left:${a}%" title="média do grupo"></u>`:""}</div><small>${[rel+(avgDisp?" ("+avgDisp+")":""),cap].filter(Boolean).join(" · ")}</small></div>`}
+function tSplit(label,big,segs,cap,wide=true){segs=segs.filter(s=>s[1]>0).sort((a,b)=>b[1]-a[1]);if(segs.length>6){const r=segs.slice(5).reduce((s,x)=>s+x[1],0);segs=segs.slice(0,5).concat([["Demais",r]])}const t=segs.reduce((s,x)=>s+x[1],0)||1;let k=0;const u=segs.map(x=>/^(Demais|Sem tema|Outras)/.test(x[0])?-1:k++);const cl=i=>u[i]<0?GRY:SEG[u[i]];
+ return `<div class="tile${wide?" wide":""}"><span class="tl">${label}</span><b class="tv">${big}</b><div class="ts">${segs.map((s,i)=>`<i style="width:${s[1]/t*100}%;background:${cl(i)}" title="${esc(s[0])}: ${pc(s[1],t)}%"></i>`).join("")}</div><ul class="tg">${segs.map((s,i)=>`<li><span style="background:${cl(i)}"></span>${esc(s[0])} <b>${pc(s[1],t)}%</b></li>`).join("")}</ul>${cap?`<small>${cap}</small>`:""}</div>`}
+const tChips=(label,big,chips,cap)=>`<div class="tile"><span class="tl">${label}</span><b class="tv">${big}</b>${chips.length?`<div class="tchips">${chips.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}${cap?`<small>${cap}</small>`:""}</div>`;
+const tCases=o=>{const op=o.filter(k=>!k.closed).length,cl=o.length-op;return `<div class="tile"><span class="tl">Processos e investigações</span><b class="tv"><span class="cdot${op?" warn":""}"></span>${op} em apuração</b><small>${cl} encerrados · em apuração não é condenação</small></div>`};
+const tBig=(label,big,cap)=>`<div class="tile"><span class="tl">${label}</span><b class="tv">${big}</b>${cap?`<small>${cap}</small>`:""}</div>`;
+function tFin(id){const f=FIN[id];if(!f||f[0]==null)return tBig("Dinheiro de campanha","Sem receita declarada",f?"até "+f[1]:"sem dados no TSE");
+ const out=Math.max(0,f[0]-f[1]-f[2]-f[3]);return tSplit("Dinheiro de campanha (declarado)",brl(f[0]/1e6),[["Partidos (fundos)",f[3]],["Pessoas físicas",f[1]],["Empresas",f[2]],["Outras fontes",out]],"Despesas contratadas: "+brl(f[5]/1e6)+(f[4]?" ("+Math.round(f[5]/f[4]*100)+"% do limite legal)":"")+" · parcial, atualizado em "+f[7]).replace("tile wide","tile wide")}
+const vizWrap=(tiles,notes)=>`<div class="tiles2">${tiles.join("")}</div><details class="rvleg"><summary>Como ler estes números</summary><ul><li>${NOTE}</li>${notes.map(n=>`<li>${n}</li>`).join("")}</ul></details>`;
+function vizGS(c){
+  const v=vecGS(c),s=v.reduce((a,b)=>a+b,0),peers=C.filter(x=>x.o===c.o),mP=mean(peers.map(x=>x.prop.length)),mH=mean(peers.map(x=>x.hist.length)),sem=ARE8.filter((a,i)=>v[i]===0);
+  const top=ARE8.map((a,i)=>[a,v[i]]).sort((a,b)=>b[1]-a[1])[0];
+  return vizWrap([
+   s?tSplit("Foco das propostas",esc(top[0])+" lidera",ARE8.map((a,i)=>[a,v[i]]),"Menções a cada área no texto das propostas"):tBig("Foco das propostas","Sem proposta detalhada","nas fontes consultadas"),
+   tChips("Áreas sem nenhuma menção",sem.length+" de 8",sem,"Nos documentos consultados"),
+   tBar("Itens de proposta",String(c.prop.length),c.prop.length,Math.max(...peers.map(x=>x.prop.length)),mP,fm1(mP),"entre os "+peers.length+" nomes"),
+   tBar("Registros do que já fez",String(c.hist.length),c.hist.length,Math.max(...peers.map(x=>x.hist.length)),mH,fm1(mH)),
+   tBig("Experiência em cargo eletivo",c.mand?"Já exerceu mandato":"Nunca exerceu","Sem mandato não é pior nem melhor"),
+   tCases(c.cases),tFin(c.id),tBig("Idade",c.age+" anos","")
+  ],["As áreas são contadas por palavras-chave no texto das propostas que consultamos; o plano completo pode ter mais."]);
+}
+function vizDF(d){
+  const at=DF.filter(x=>x.tier==="atual"&&x.em),cm=CAM[d.id],T=[];
+  if(d.em){const pf=x=>x.em[3],mp=mean(at.map(pf)),mx=Math.max(...at.map(pf)),pos=at.slice().sort((a,b)=>pf(b)-pf(a)).findIndex(x=>x.id===d.id);
+   const pixOf=x=>(x.em[5].find(f=>/pix|especiai/i.test(f[0]))||[0,0])[1]/x.em[3];
+   T.push(tBar("Emendas pagas "+d.em[0],brl(d.em[3]),d.em[3],mx,mp,brl(mp),pos>=0?(pos+1)+"º de "+at.length+" atuais":""));
+   T.push(tBar("Parcela em Emenda Pix",Math.round(pixOf(d)*100)+"%",pixOf(d),1,mean(at.map(pixOf)),Math.round(mean(at.map(pixOf))*100)+"%","vai direto à prefeitura"));
+   const sp=d.em[5].map(f=>[f[0],f[1]]);T.push(tSplit("Para onde foi o dinheiro",esc(sp.slice().sort((a,b)=>b[1]-a[1])[0][0]),sp,"Principais áreas registradas"));
+  }else T.push(tBig("Emendas federais","Sem emendas","no período"));
+  if(cm&&cm[0]){const mn=mean(Object.values(CAM).filter(x=>x[0]).map(x=>x[0])),mxn=Math.max(...Object.values(CAM).map(x=>x[0]));
+   T.push(tBar("Projetos assinados desde 2023",String(cm[0]),cm[0],mxn,mn,String(Math.round(mn)),"PL "+cm[2][0]+" · PEC "+cm[2][1]+" · PLP "+cm[2][2]+" · PDL "+cm[2][3]));
+   const th=cm[1].map((x,i)=>[i<8?ARE8[i]:"Sem tema definido",x]);const tt=th.slice(0,8).sort((a,b)=>b[1]-a[1])[0];
+   T.push(tSplit("Sobre o que legisla",esc(tt[0]),th,"Tema pela ementa (classificação automática)"));
+   T.push(tChips("Comissões atuais",cm[3].length?cm[3].length+"":"Nenhuma confirmada",cm[3].map(c=>(COM[c.split(" ")[0]]||c)+(c.includes("presidente")?" (presidente)":"")),"Só permanentes conferidas"));
+  }else T.push(tBig("Projetos e comissões","Sem dados","não exerceu mandato de 2023 a 2026"));
+  T.push(tCases(d.cases));T.push(tFin(d.id));
+  return vizWrap(T,["Emenda Pix vai direto ao caixa da prefeitura, sem projeto definido no Orçamento.","Projetos assinados contam como autor ou coautor; PECs costumam ter dezenas de assinaturas.","A marca ┃ nas barras é a média do grupo."]);
+}
+function vizDE(d){
+  const at=DE.filter(x=>x.em),T=[],pv=x=>x.em[2];
+  if(d.em){const e=d.em,mp=mean(at.map(pv)),pos=at.slice().sort((a,b)=>pv(b)-pv(a)).findIndex(x=>x.id===d.id),v=vecDEe(d);
+   T.push(tBar("Emendas pagas 2023–2026",mi(e[2]),e[2],Math.max(...at.map(pv)),mp,mi(mp),(pos+1)+"º de "+at.length));
+   T.push(tSplit("Quem executa (tipo de órgão)",esc(DEA[v.indexOf(Math.max(...v))]),DEA.map((a,i)=>[a,v[i]]),"Entre os 5 maiores órgãos do deputado"));
+   const mm=mean(at.map(x=>x.em[7]));T.push(tBar("Municípios atendidos",String(e[7]),e[7],Math.max(...at.map(x=>x.em[7])),mm,String(Math.round(mm)),""));
+   T.push(tSplit("Regiões que receberam",esc(e[4][0][0]),e[4].map(r=>[r[0],r[1]]),"Valor empenhado"));
+  }else T.push(tBig("Emendas estaduais","Sem emendas","com autoria confirmada"));
+  const mg=mean(DE.map(x=>x.gab[1]));T.push(tBar("Custo do gabinete (mês)","R$ "+d.gab[1]+" mil",d.gab[1],Math.max(...DE.map(x=>x.gab[1])),mg,"R$ "+Math.round(mg)+" mil",d.gab[0]+" pessoas"));
+  if(d.v22)T.push(tBig("Votos em 2022",d.v22[0].toLocaleString("pt-BR"),"Maior base: "+esc(d.v22[1])+" ("+String(d.v22[2]).replace(".",",")+"%)"));
+  if(d.bens)T.push(tBig("Bens declarados",mi(d.bens),"TSE, registro de 2026"));
+  T.push(tCases(d.cases));T.push(tFin(d.id));
+  return vizWrap(T,["Só entram emendas com autoria confirmada e executada; é um piso, não o total.","Gabinete: custo de tabela dos cargos, não é folha de pagamento.","A marca ┃ nas barras é a média do grupo."]);
 }
 /* pontos observáveis */
 const obsUl=(rows,note,raw)=>raw?rows:`<p class="cnote" style="margin:0 0 10px">${note}</p><ul class="obs">${rows.map(r=>`<li><span class="ok">${r[0]}</span><span class="ov">${r[1]}${r[2]?`<small>${r[2]}</small>`:""}</span><span class="os">${r[3]||""}</span></li>`).join("")}</ul>`;
