@@ -316,6 +316,10 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
 .srcs{display:grid;gap:0;padding:6px 18px}.srow{display:grid;gap:3px;padding:12px 0;border-bottom:1px solid var(--line)}.srow:last-child{border:0}.srow span{color:var(--ink-2);font-size:14px}
 .srclink{margin:10px 0 0;font-size:14px}.lnk{background:none;border:0;padding:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer}
 .srow a{color:var(--accent);word-break:break-word}
+@media (max-width:560px){nav.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.tab{white-space:normal;line-height:1.15;min-height:40px;display:flex;align-items:center;justify-content:center}}
+.lnk{display:inline-block;padding:12px 4px;min-height:44px;box-sizing:border-box}
+.shg a,.shg button{min-height:44px;box-sizing:border-box;display:flex;align-items:center;justify-content:center}.shh button{min-width:44px;min-height:44px}
+@media (min-width:561px) and (max-width:1180px){nav.tabs{flex-wrap:wrap;overflow:visible;position:static}}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
