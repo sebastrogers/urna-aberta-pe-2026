@@ -12,6 +12,7 @@ Guia interativo dos candidatos a **governador** e **senador** de Pernambuco nas 
 - Tendência das pesquisas Quaest e Datafolha registradas no TSE
 - Links dos debates de governador e Senado
 - Tema claro e escuro
+- Fotos oficiais dos candidatos (TSE e Agência Senado)
 
 ## Fontes
 
