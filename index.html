@@ -315,6 +315,7 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
 .warnbig{background:var(--sun-soft);border:2px solid #e0a800;border-radius:12px;padding:16px 18px;font-size:15px;color:var(--ink);max-width:80ch}.warnbig ul{margin:8px 0 0;padding-left:20px;display:grid;gap:6px}
 .srcs{display:grid;gap:0;padding:6px 18px}.srow{display:grid;gap:3px;padding:12px 0;border-bottom:1px solid var(--line)}.srow:last-child{border:0}.srow span{color:var(--ink-2);font-size:14px}
 .srclink{margin:10px 0 0;font-size:14px}.lnk{background:none;border:0;padding:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer}
+.srow a{color:var(--accent);word-break:break-word}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -454,12 +455,12 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
   <section class="block" id="sec-src" hidden>
     <div><button type="button" class="lnk" id="srcback">← Voltar</button><h2>De onde essas informações foram coletadas</h2><p class="sub">Tudo vem de fontes públicas. Nada aqui é opinião de partido ou campanha.</p></div>
     <div class="panel srcs">
-      <div class="srow"><b>Candidaturas, bens, doações e gastos de campanha</b><span>TSE, DivulgaCandContas (divulgacandcontas.tse.jus.br). Dados declarados pelas próprias candidaturas; prestação de contas parcial até o fim da campanha.</span></div>
-      <div class="srow"><b>Emendas parlamentares federais (por autor)</b><span>Portal da Transparência do Governo Federal (portaldatransparencia.gov.br).</span></div>
-      <div class="srow"><b>Projetos, temas e comissões de deputados federais</b><span>Câmara dos Deputados, Dados Abertos (dadosabertos.camara.leg.br). Os temas são classificados por palavras-chave nas ementas, então são aproximação.</span></div>
-      <div class="srow"><b>Emendas estaduais, gabinete e votação de 2022</b><span>Alepe e Portal da Transparência de PE, via base aberta hermesalvesbr/emendas (github.com/hermesalvesbr/emendas).</span></div>
-      <div class="srow"><b>Nomes de municípios</b><span>IBGE, API de localidades.</span></div>
-      <div class="srow"><b>Pesquisas, debates, processos e matérias</b><span>Registros das pesquisas no TSE e imprensa (Folha de Pernambuco, Diario de Pernambuco, G1 PE, JC, CNN Brasil e outros), sempre com o veículo citado no item.</span></div>
+      <div class="srow"><b>Candidaturas, bens, doações e gastos de campanha</b><span>TSE, DivulgaCandContas (<a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">divulgacandcontas.tse.jus.br</a>). Dados declarados pelas próprias candidaturas; prestação de contas parcial até o fim da campanha.</span></div>
+      <div class="srow"><b>Emendas parlamentares federais (por autor)</b><span>Portal da Transparência do Governo Federal (<a href="https://portaldatransparencia.gov.br/emendas" target="_blank" rel="noopener">portaldatransparencia.gov.br/emendas</a>).</span></div>
+      <div class="srow"><b>Projetos, temas e comissões de deputados federais</b><span>Câmara dos Deputados, Dados Abertos (<a href="https://dadosabertos.camara.leg.br" target="_blank" rel="noopener">dadosabertos.camara.leg.br</a>). Os temas são classificados por palavras-chave nas ementas, então são aproximação.</span></div>
+      <div class="srow"><b>Emendas estaduais, gabinete e votação de 2022</b><span>Alepe (<a href="https://alepe.pe.gov.br" target="_blank" rel="noopener">alepe.pe.gov.br</a>) e Transparência de PE (<a href="https://transparencia.pe.gov.br" target="_blank" rel="noopener">transparencia.pe.gov.br</a>), via base aberta <a href="https://github.com/hermesalvesbr/emendas" target="_blank" rel="noopener">hermesalvesbr/emendas</a>.</span></div>
+      <div class="srow"><b>Nomes de municípios</b><span>IBGE, API de localidades (<a href="https://servicodados.ibge.gov.br/api/docs/localidades" target="_blank" rel="noopener">servicodados.ibge.gov.br/api/docs/localidades</a>).</span></div>
+      <div class="srow"><b>Pesquisas, debates, processos e matérias</b><span>Registros das pesquisas (<a href="https://pesqeleicoes.tse.jus.br" target="_blank" rel="noopener">PesqEle, TSE</a>) e imprensa (<a href="https://folhape.com.br" target="_blank" rel="noopener">Folha de Pernambuco</a>, <a href="https://diariodepernambuco.com.br" target="_blank" rel="noopener">Diario de Pernambuco</a>, <a href="https://g1.globo.com/pe" target="_blank" rel="noopener">G1 PE</a>, <a href="https://jc.ne10.uol.com.br" target="_blank" rel="noopener">JC</a>, <a href="https://cnnbrasil.com.br" target="_blank" rel="noopener">CNN Brasil</a> e outros), sempre com o veículo citado no item.</span></div>
       <div class="srow"><b>Espectro político</b><span>Estimativa editorial a partir do partido e do histórico. Não é autodeclaração.</span></div>
     </div>
     <div class="warnbig" role="note"><b>O que esta página NÃO tem</b><ul><li>Lista completa de deputados: mostra só parte das candidaturas (veja o aviso em cada aba).</li><li>Emendas federais por município ou instituição.</li><li>Gastos de cota parlamentar (CEAP) e votações nominais.</li><li>Resultado da apuração: só depois do dia 4/10, com dados oficiais do TSE.</li></ul></div>
