@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Guia interativo dos candidatos a governador e senador de Pernambuco em 2026: propostas, mandatos, processos, espectro político, pesquisas e debates.">
+<title>Urna Aberta PE 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap">
+<script>try{var t=localStorage.getItem("pe26theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+/* Layout: coluna de 1040px. Abertura em duas colunas: manchete à esquerda, urna eletrônica funcional à direita (digitar o número abre a ficha). Abaixo, abas em pílula e fichas com teclas de urna. Verde CONFIRMA como acento, laranja CORRIGE como apoio, amarelo-sol para destaques. */
+:root{
+  --bg:#eef1ed; --surface:#ffffff; --sunk:#f3f5f2; --ink:#101b17; --ink-2:#4b5752; --ink-3:#7f8a85; --line:#dfe4df; --line-2:#cdd4ce;
+  --accent:#16834a; --accent-ink:#ffffff; --accent-soft:#e2f2e8; --orange:#e2722a; --sun:#f2c230; --sun-soft:#fdf3cf; --blue:#1d4f9c;
+  --warn:#a3461a; --warn-soft:#fbe9df; --ok:#16834a; --ok-soft:#e2f2e8;
+  --left:#b0425f; --center:#7a7d86; --right:#2758a8;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --grid:#e8ece8;
+  --urna:#d9d3c3; --urna-2:#c9c2b0; --urna-ink:#2b2a25; --screen:#e9f0e4; --screen-ink:#1a2a1f; --key:#1e2421; --key-ink:#f2f2ee;
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1411; --surface:#141e1a; --sunk:#1a2622; --ink:#eef3ef; --ink-2:#b9c4be; --ink-3:#86928c; --line:#24312c; --line-2:#33423c;
+  --accent:#4fcf86; --accent-ink:#06150d; --accent-soft:#163024; --orange:#f08a45; --sun:#f5cd4c; --sun-soft:#3a3214; --blue:#7fa8ec;
+  --warn:#f3a273; --warn-soft:#3a2418; --ok:#4fcf86; --ok-soft:#163024;
+  --left:#ea8aa4; --center:#a9adb6; --right:#8cb2f0;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --grid:#1f2b27;
+  --urna:#3a3730; --urna-2:#2c2a24; --urna-ink:#e7e1d1; --screen:#cfe0c6; --screen-ink:#13201a; --key:#0b0f0d; --key-ink:#f2f2ee; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1411; --surface:#141e1a; --sunk:#1a2622; --ink:#eef3ef; --ink-2:#b9c4be; --ink-3:#86928c; --line:#24312c; --line-2:#33423c;
+  --accent:#4fcf86; --accent-ink:#06150d; --accent-soft:#163024; --orange:#f08a45; --sun:#f5cd4c; --sun-soft:#3a3214; --blue:#7fa8ec;
+  --warn:#f3a273; --warn-soft:#3a2418; --ok:#4fcf86; --ok-soft:#163024;
+  --left:#ea8aa4; --center:#a9adb6; --right:#8cb2f0;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --grid:#1f2b27;
+  --urna:#3a3730; --urna-2:#2c2a24; --urna-ink:#e7e1d1; --screen:#cfe0c6; --screen-ink:#13201a; --key:#0b0f0d; --key-ink:#f2f2ee; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans);padding-inline:16px;padding-block:0 56px;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 1px 1px,var(--line) 1px,transparent 0);background-size:22px 22px;background-attachment:fixed}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.15;margin:0;font-weight:600}
+h2,h3{font-family:var(--display)}
+a{color:var(--accent)}
+.muted{color:var(--ink-2)}
+.label{font:600 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+/* topo */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px 6px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font:700 17px/1 var(--display);letter-spacing:-.01em}
+.brand .mark{display:flex;gap:3px}
+.brand .mark i{font:600 12px/1 var(--mono);font-style:normal;background:var(--ink);color:var(--bg);border-radius:4px;padding:5px 5px}
+.brand .mark i:last-child{background:var(--accent);color:var(--accent-ink)}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:none;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;display:flex;align-items:center;gap:6px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg svg{width:14px;height:14px}
+/* abertura */
+.hero{padding-block:22px 30px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:center}
+.hero-txt{display:grid;gap:14px;min-width:0}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:600 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.kicker .flag{display:inline-flex;height:10px;width:30px;border-radius:2px;overflow:hidden}.kicker .flag b{flex:1}
+.hero h1{font:800 clamp(40px,7.4vw,78px)/.92 var(--display);font-stretch:78%;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--accent);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.14em;background:var(--sun);z-index:-1;border-radius:2px}
+.hero p{margin:0;max-width:52ch;color:var(--ink-2);font-size:16px}
+.count{display:flex;gap:10px;flex-wrap:wrap}
+.count div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:grid;gap:2px;min-width:0}
+.count b{font:800 26px/1 var(--display);font-stretch:80%;font-variant-numeric:tabular-nums}
+.count span{font-size:12px;color:var(--ink-3)}
+.count .big{background:var(--ink);border-color:var(--ink);color:var(--bg)}.count .big span{color:var(--bg);opacity:.7}.count .big b{color:var(--sun)}
+/* urna */
+.urna{background:linear-gradient(160deg,var(--urna),var(--urna-2));border-radius:18px;padding:16px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 18px 40px -18px rgba(16,27,23,.45);color:var(--urna-ink);min-width:0}
+.screen{background:var(--screen);color:var(--screen-ink);border-radius:8px;padding:12px;display:grid;gap:8px;align-content:start;min-height:200px;box-shadow:inset 0 2px 6px rgba(0,0,0,.18);font-family:var(--sans);min-width:0}
+.screen .cap{font:600 10.5px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.screen .cargo{font:800 18px/1 var(--display);font-stretch:85%;letter-spacing:.02em}
+.digits{display:flex;gap:5px}
+.digits span{width:28px;height:36px;border:1.5px solid var(--screen-ink);border-radius:3px;display:grid;place-items:center;font:600 22px/1 var(--mono);background:rgba(255,255,255,.35)}
+.digits span.cur{animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{background:var(--screen-ink)}}
+.screen .res{font-size:13px;line-height:1.35;min-height:52px}
+.screen .res b{display:block;font:700 16px/1.15 var(--display)}
+.screen .hint{font-size:11px;opacity:.75;border-top:1px solid rgba(0,0,0,.18);padding-top:6px;margin-top:auto}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;align-content:start}
+.key{background:var(--key);color:var(--key-ink);border:0;border-radius:6px;padding:9px 0;font:600 16px/1 var(--mono);cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.4)}
+.key:active{transform:translateY(1px);box-shadow:none}
+.key.zero{grid-column:2}
+.acts{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}
+.act.ok{grid-column:1/-1}
+.act{border:0;border-radius:6px;padding:9px 2px;font:700 10.5px/1 var(--sans);letter-spacing:.04em;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.act.b{background:#f7f7f2;color:#1b1b18}.act.c{background:#e8792b;color:#1b1206}.act.ok{background:#22a35a;color:#04170b}
+/* abas */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:10px;background:var(--bg)}
+.tab{border:1px solid var(--line-2);background:var(--surface);padding:9px 16px;border-radius:999px;font:600 14px/1 var(--sans);color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+section.block{padding-block:26px 0;display:grid;gap:14px}
+.block h2{font:800 clamp(22px,3vw,28px)/1.05 var(--display);font-stretch:85%;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.block h2::before{content:"";width:10px;height:22px;border-radius:2px;background:var(--accent);flex:none}
+.sub{margin:6px 0 0;color:var(--ink-2);max-width:68ch;font-size:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+/* espectro */
+.spectrum{padding:20px 16px 14px;overflow-x:auto}
+.track{min-width:660px}
+.axis{height:8px;background:linear-gradient(90deg,var(--left),var(--center) 50%,var(--right));margin:0 10px;border-radius:4px}
+.axis-labels{display:flex;justify-content:space-between;font-size:11.5px;font-weight:500;color:var(--ink-3);margin:8px 10px 0}
+.lanes{position:relative;margin:0 10px}
+.dot{position:absolute;display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:3px 10px 3px 3px;font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer}
+.dot .av{width:22px;height:22px;font-size:9px;border-width:2px}
+.dot:hover,.dot.on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+/* avatar */
+.av{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:800 16px/1 var(--display);font-stretch:85%;color:var(--ink);background:var(--sunk);border:3px solid var(--center);overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.sp-e{border-color:var(--left)}.av.sp-c{border-color:var(--center)}.av.sp-d{border-color:var(--right)}
+/* filtros */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters input[type=search],.filters select{font:inherit;font-size:14px;background:var(--surface);color:var(--ink);border:1px solid var(--line-2);border-radius:10px;padding:9px 12px}
+.filters input[type=search]{flex:1 1 240px;min-width:0}
+.check{display:flex;gap:7px;align-items:center;font-size:14px;color:var(--ink-2)}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:12px}
+.card{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:11px;cursor:pointer;min-width:0;align-content:start;position:relative}
+.card:hover{border-color:var(--line-2);transform:translateY(-1px)}
+.card.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.card .who{display:flex;gap:11px;align-items:center;min-width:0}
+.card h3{font-size:17px;font-weight:700;font-stretch:88%}
+.meta{font-size:13px;color:var(--ink-2)}
+.kc{display:inline-flex;gap:2px;vertical-align:middle}
+.kc i{font:600 11px/1 var(--mono);font-style:normal;background:var(--key);color:var(--key-ink);border-radius:3px;padding:3px 4px}
+.kc.lg i{font-size:18px;padding:7px 7px;border-radius:5px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--sunk);color:var(--ink-2)}
+.tag.sp-e{color:var(--left)}.tag.sp-c{color:var(--center)}.tag.sp-d{color:var(--right)}
+.tag.flag{background:var(--warn-soft);color:var(--warn)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.pbar{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;font-size:12px;color:var(--ink-3)}
+.pbar .bar{height:6px;background:var(--sunk);border-radius:3px;overflow:hidden}.pbar .bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.pbar b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:700}
+/* detalhe */
+#detail{padding:24px;display:grid;gap:18px;scroll-margin-top:70px;border-top:6px solid var(--accent)}
+.dhead{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.dhead .av{width:72px;height:72px;font-size:24px;border-width:4px}
+.dhead h2{font:800 clamp(28px,4.4vw,40px)/1 var(--display);font-stretch:80%;letter-spacing:-.02em}
+.dhead .kc{margin-left:auto}
+.dtabs{display:flex;gap:6px;flex-wrap:wrap}
+.dtab{border:1px solid var(--line-2);background:var(--surface);padding:7px 12px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.dtab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.dbody{max-width:72ch;min-width:0}
+.dbody ul{margin:0;padding-left:18px;display:grid;gap:8px}
+.dbody li::marker{color:var(--accent)}
+.dbody p{margin:0 0 8px}
+dl.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 24px;margin:0 0 16px;padding:14px;background:var(--sunk);border-radius:10px}
+dl.facts div{display:grid;gap:4px}dl.facts dd{margin:0}
+.case{padding:14px;border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;margin-bottom:10px}
+.case.closed{border-left-color:var(--ok)}
+.case h4{font:700 16px/1.25 var(--display);margin:8px 0 4px}
+.status{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:4px;background:var(--warn-soft);color:var(--warn)}
+.status.closed{background:var(--ok-soft);color:var(--ok)}
+.none{color:var(--ink-3)}
+.src{font-size:13.5px}.src a{word-break:break-word}
+/* pesquisas */
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:12px}
+.chart{padding:16px;display:grid;gap:10px;min-width:0}
+.chart h3{font-size:17px;font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:flex;align-items:center;gap:6px}.legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+.svgwrap{position:relative;overflow-x:auto}
+.svgwrap svg{display:block;width:100%;height:auto}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.4;padding:7px 9px;border-radius:7px;white-space:nowrap;transform:translate(-50%,-110%);z-index:3}
+.chart.wide{grid-column:1/-1;order:-1;border-color:var(--ink)}
+.chart.wide h3{font-size:21px}
+.chead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.xbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:600;color:var(--ink-2);cursor:pointer;flex:none}
+.xbtn:hover{border-color:var(--ink);color:var(--ink)}.xbtn svg{width:14px;height:14px}
+.chart.wide .xbtn{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cnote{font-size:12px;color:var(--ink-3)}
+details.tbl summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2)}
+.tblwrap{overflow-x:auto;margin-top:8px}
+table{border-collapse:collapse;font-size:13px;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:600;color:var(--ink-3)}
+.latest{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.pcard{padding:16px;display:grid;gap:9px;min-width:0}
+.pcard h3{font-size:16px;font-weight:700}
+.prow{display:grid;grid-template-columns:128px 1fr 38px;gap:10px;align-items:center;font-size:13px}
+.prow .bar{height:10px;background:var(--sunk);border-radius:5px;overflow:hidden}.prow .bar i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.prow:first-of-type .bar i{background:var(--ink)}
+.prow b{text-align:right;font:700 14px/1 var(--display);font-variant-numeric:tabular-nums}
+/* debates */
+.debates{display:grid;gap:12px}
+.deb{padding:0;display:grid;grid-template-columns:96px 1fr;overflow:hidden}
+.deb .when{background:var(--ink);color:var(--bg);padding:16px 12px;display:grid;align-content:start;gap:4px;font:500 12px/1.3 var(--sans)}
+.deb .when b{font:800 30px/1 var(--display);font-stretch:80%;color:var(--sun)}
+.deb.today .when{background:var(--accent);color:var(--accent-ink)}.deb.today .when b{color:var(--accent-ink)}
+.deb .body{padding:16px;min-width:0}
+.deb h3{font-size:18px;font-weight:700}
+.deb .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid var(--line-2);color:var(--ink);background:var(--surface);border-radius:999px;padding:7px 12px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{border-color:var(--ink)}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.method{padding:18px 20px;font-size:14px;color:var(--ink-2);background:var(--sun-soft);border-color:transparent}
+.method h3{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.method p{margin:0 0 6px}
+footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.urna{max-width:520px;width:100%}}
+/* espectro em lista vertical no celular */
+.vlist{display:grid;gap:4px}
+.vhead{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:10px;font-size:11px;font-weight:600;color:var(--ink-3);padding:0 2px 4px}
+.vhead .vax{display:flex;justify-content:space-between;gap:4px}
+.vrow{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:10px;align-items:center;border:0;background:none;padding:5px 2px;border-radius:8px;cursor:pointer;text-align:left;font-size:13px;font-weight:600;min-height:40px}
+.vrow:hover,.vrow.on{background:var(--sunk)}
+.vrow .nm{display:flex;align-items:center;gap:8px;min-width:0}.vrow .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vrow .av{width:26px;height:26px;font-size:10px;border-width:2px}
+.vtrack{position:relative;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--left),var(--center) 50%,var(--right));opacity:.9}
+.vtrack i{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--ink);transform:translate(-50%,-50%)}
+@media (max-width:640px){.spectrum{overflow:visible;padding:14px 12px}.track{min-width:0}.track .axis,.track .axis-labels{display:none}}
+@media (max-width:560px){nav.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.tab{padding:9px 4px;font-size:13px;text-align:center}.count{display:grid;grid-template-columns:repeat(3,1fr)}.count div{padding:9px 10px}.count b{font-size:22px}.count span{font-size:11px;line-height:1.3}.hero h1{font-size:clamp(36px,11vw,48px)}.urna{padding:12px;gap:10px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.screen{min-height:0;padding:10px}.digits span{width:24px;height:32px;font-size:19px}.key{padding:8px 0;font-size:15px}.act{font-size:9.5px;padding:8px 1px}.acts{grid-template-columns:1fr 1fr;}.act.ok{grid-column:1/-1}#detail{padding:18px 16px}.dbody ul{padding-left:16px}.chart{padding:14px 12px}}
+@media (max-width:520px){.prow{grid-template-columns:100px 1fr 32px}.deb{grid-template-columns:1fr}.deb .when{grid-auto-flow:column;justify-content:start;align-items:baseline;gap:10px;padding:10px 16px}.deb .when b{font-size:22px}.dhead .kc{margin-left:0}}
+@media (max-width:340px){.urna{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.card,.dot,.btn,.seg button,.tab{transition:border-color .15s,background .15s,color .15s,transform .15s}}
+@media (prefers-reduced-motion:reduce){.digits span.cur{animation:none;background:rgba(0,0,0,.15)}}
+</style>
+<style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+
+<div class="wrap">
+<div class="top">
+  <div class="brand"><span class="mark"><i>P</i><i>E</i><i>26</i></span> Urna Aberta</div>
+  <div class="seg" role="group" aria-label="Tema">
+    <button id="th-light" data-t="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Claro</button>
+    <button id="th-dark" data-t="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Escuro</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-txt">
+    <div class="kicker"><span class="flag" aria-hidden="true"><b style="background:var(--blue)"></b><b style="background:var(--surface)"></b><b style="background:var(--sun)"></b></span>Eleições 2026 · Pernambuco</div>
+    <h1>Quem quer governar <em>Pernambuco</em></h1>
+    <p>Propostas, o que cada candidato já fez em mandato, escândalos e processos, espectro político, pesquisas e debates. Fontes oficiais e imprensa, atualizado em 1º de outubro.</p>
+    <div class="count">
+      <div class="big"><b id="days">3</b><span>dias para o 1º turno, 4/10</span></div>
+      <div><b>8</b><span>a governador</span></div>
+      <div><b>12</b><span>ao Senado, vote em 2</span></div>
+    </div>
+  </div>
+  <div class="urna" aria-label="Simulador de urna: digite o número de um candidato para abrir a ficha">
+    <div class="screen">
+      <div class="cap">Seu voto para</div>
+      <div class="cargo" id="u-cargo">GOVERNADOR · SENADOR</div>
+      <div class="cap">Número:</div>
+      <div class="digits" id="u-digits"><span class="cur"></span><span></span><span></span></div>
+      <div class="res" id="u-res">Digite o número de um candidato.</div>
+      <div class="hint" id="u-hint">Simulador. Aperte CONFIRMA para abrir a ficha.</div>
+    </div>
+    <div class="keys">
+      <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+      <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+      <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+      <button class="key zero" data-k="0">0</button>
+      <div class="acts"><button class="act b" id="u-branco">BRANCO</button><button class="act c" id="u-corrige">CORRIGE</button><button class="act ok" id="u-confirma">CONFIRMA</button></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Seções">
+  <button class="tab" role="tab" data-office="gov" aria-selected="true">Governador</button>
+  <button class="tab" role="tab" data-office="sen" aria-selected="false">Senado</button>
+  <button class="tab" role="tab" data-office="pol" aria-selected="false">Pesquisas</button>
+  <button class="tab" role="tab" data-office="deb" aria-selected="false">Debates</button>
+</nav>
+
+<main>
+  <section class="block" id="sec-spec">
+    <div><h2>Espectro político aproximado</h2><p class="sub">Toque num nome para abrir a ficha. Estimativa feita a partir do partido, das alianças e de posições públicas.</p></div>
+    <div class="panel spectrum"><div class="track">
+      <div class="lanes" id="lanes"></div>
+      <div class="axis"></div>
+      <div class="axis-labels"><span>Esquerda radical</span><span>Esquerda</span><span>Centro</span><span>Direita</span><span>Direita conservadora</span></div>
+    </div></div>
+  </section>
+
+  <section class="block" id="sec-list">
+    <h2 id="list-title">Candidatos</h2>
+    <div class="filters">
+      <input id="q" type="search" placeholder="Buscar nome, partido ou tema (ex.: tarifa zero)" aria-label="Buscar">
+      <select id="sp" aria-label="Filtrar por espectro"><option value="">Todo o espectro</option><option value="e">Esquerda</option><option value="c">Centro</option><option value="d">Direita</option></select>
+      <label class="check"><input id="mand" type="checkbox"> Já teve mandato</label>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="block" id="sec-detail"><article class="panel" id="detail" aria-live="polite"></article></section>
+
+  <section class="block" id="sec-polls" hidden>
+    <div><h2>Tendência das pesquisas</h2><p class="sub">Intenção de voto estimulada no 1º turno, por data de campo. Pesquisas registradas no TSE, margem de erro de 3 pontos. São retratos do momento, não previsões. Passe o dedo ou o mouse sobre os pontos.</p></div>
+    <div class="charts" id="charts"></div>
+    <h2 style="margin-top:12px">Últimas rodadas</h2>
+    <div class="latest" id="latest"></div>
+  </section>
+
+  <section class="block" id="sec-deb" hidden>
+    <div><h2>Debates</h2><p class="sub">Encontros entre candidatos transmitidos em TV, rádio e internet. Os links levam à íntegra quando disponível ou à cobertura dos principais momentos.</p></div>
+    <div class="debates" id="debates"></div>
+  </section>
+
+  <section class="block">
+    <div class="panel method">
+      <h3>Como ler esta página</h3>
+      <p>O espectro é uma estimativa editorial, não uma autodeclaração. Combina a classificação usual dos partidos, as alianças de 2026 e posições públicas sobre Lula, Bolsonaro, privatizações e segurança.</p>
+      <p>Investigação, denúncia ou processo não significam culpa. Cada caso traz a situação mais recente encontrada: arquivado, absolvido ou em andamento.</p>
+      <p>Planos de governo completos estão no DivulgaCandContas do TSE (divulgacandcontas.tse.jus.br).</p>
+    </div>
+  </section>
+</main>
+
+<footer>Compilado em 1º/10/2026. Registros do TSE podem mudar até a eleição. As candidaturas de Professor Jeremias e Pastor Gilvan Costa foram indeferidas pelo TRE-PE. Fotos oficiais não incluídas nesta versão; os círculos mostram as iniciais e a cor da faixa indica o espectro.</footer>
+</div>
+
+<script>
+const S={
+ tse:["DivulgaCandContas (TSE)","https://divulgacandcontas.tse.jus.br/"],
+ cnnGov:["CNN Brasil: candidatos a governador de PE","https://www.cnnbrasil.com.br/eleicoes/quem-sao-os-candidatos-a-governador-de-pernambuco-em-2026/"],
+ poder:["Poder360: candidatos ao governo de PE","https://www.poder360.com.br/poder-eleicoes-2026/saiba-quem-sao-os-candidatos-ao-governo-de-pernambuco-em-2026/"],
+ wiki:["Wikipédia: eleição em PE 2026 (coligações)","https://en.wikipedia.org/wiki/2026_Pernambuco_general_election"],
+ senado:["Agência Senado: candidatos ao Senado por PE","https://www12.senado.leg.br/noticias/candidatos-2026/pernambuco"],
+ quaest:["Gazeta do Povo: Quaest 25–28/9","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/quaest-governador-senador-pernambuco-setembro-2026-3/"],
+ dfolha:["PE360: Datafolha 22–24/9","https://www.pe360.com.br/noticia/5788/ribeirao/politica/datafolha-raquel-lidera-mas-joao-reduz-diferenca-em-pernambuco.html"],
+ seg:["Diario de PE: propostas de segurança","https://www.diariodepernambuco.com.br/politica/2026/08/11721642-seguranca-publica-em-pauta-veja-as-propostas-dos-candidatos-ao-governo-de-pernambuco.html"],
+ mob:["Diario de PE: propostas de mobilidade","https://www.diariodepernambuco.com.br/amp/politica/2026/08/11721852-metro-obras-e-tarifa-zero-o-que-propoem-os-candidatos-para-mobilidade-em-pernambuco.html"],
+ edu:["Brasil em Folhas: propostas para educação","https://www.brasilemfolhas.com.br/2026/09/candidatos-ao-governo-de-pernambuco-apresentam-planos-para-educacao-publica/"],
+ rlPlano:["Blog da Renata Gondim: plano de Raquel Lyra","https://blogdarenata.com.br/raquel-lyra-apresenta-plano-de-governo-com-foco-na-continuidade-de-obras-e-acoes-em-pernambuco/"],
+ rl10mil:["Jamildo: Raquel promete 10 mil agentes","https://jamildo.com/politica/raquel-lyra-promete-contratar-10-mil-agentes-de-seguranca-em-eventual-segundo-mandato.html"],
+ rlAprov:["Diario de PE: aprovação do governo (Quaest)","https://www.diariodepernambuco.com.br/politica/2026/09/11725288-quaest-governo-raquel-lyra-tem-aprovacao-de-59-e-desaprovacao-de-33.html"],
+ rlBio:["O Brasilianista: perfil de Raquel Lyra","https://obrasilianista.com.br/2026/09/01/politica/raquel-lyra-candidata-governo-pernambuco/"],
+ rlLula:["O Tempo: Raquel indica apoio a Lula","https://www.otempo.com.br/eleicoes/2026/presidentes/2026/8/6/raquel-lyra-do-partido-de-caiado-indica-que-deve-apoiar-lula-na-disputa-a-presidencia"],
+ odio:["Poder360: acusação de “gabinete do ódio”","https://www.poder360.com.br/poder-eleicoes-2026/joao-campos-diz-que-raquel-lyra-mantem-gabinete-do-odio/"],
+ odio2:["Diario de PE: troca de acusações","https://www.diariodepernambuco.com.br/politica/2026/08/11722418-raquel-lyra-troca-acusacao-de-gabinete-do-odio-com-joao-campos.html"],
+ espiao:["Folha de PE: PF apura monitoramento","https://www.folhape.com.br/politica/pf-apura-possivel-monitoramento-indevido-do-governo-de-pe-contra/465035/"],
+ debateGov:["Brasil de Fato: debate da TV Globo","https://www.brasildefato.com.br/2026/09/29/pernambuco-joao-campos-lembra-historico-de-raquel-lyra-no-psb-em-debate-na-tv-globo/"],
+ jcPlano:["Jamildo: as 178 propostas de João Campos","https://jamildo.com/politica/plano-de-governo-de-joao-campos-preve-mais-de-170-propostas-para-pernambuco-misturando-heranca-familiar-e-inovacao.html"],
+ jc2024:["Marco Zero: reeleição com 78%","https://marcozero.org/joao-campos-e-reeleito-como-o-prefeito-mais-votado-da-historia-do-recife/"],
+ jcCreche:["CartaCapital: balanço da gestão no Recife","https://www.cartacapital.com.br/politica/sem-surpresas-joao-campos-e-reeleito-em-recife/"],
+ jcMPF:["Poder360: MPF apura contratos","https://www.poder360.com.br/poder-justica/mpf-apura-irregularidades-em-contratos-na-gestao-de-joao-campos/"],
+ jcTCE:["Metrópoles: auditoria do TCE (R$ 16 mi)","https://www.metropoles.com/colunas/tacio-lorran/tce-aponta-superfaturamento-e-prejuizo-de-r-16-milhoes-em-contratos-na-gestao-joao-campos"],
+ jcParque:["Portal de Prefeitura: TCE e Parque Eduardo Campos","https://portaldeprefeitura.com.br/bastidores-da-politica/tce-aponta-sobrepreco-em-obras-da-gestao-joao-campos/600927/"],
+ ivCnn:["CNN Brasil: quem é Ivan Moraes","https://www.cnnbrasil.com.br/eleicoes/quem-e-ivan-moraes-candidato-ao-governo-de-pernambuco/"],
+ ivTz:["Blog do Mário Flávio: tarifa zero","https://blogdomarioflavio.com.br/ivan-moraes-critica-revezamento-de-herdeiros-e-propoe-tarifa-zero-no-transporte-em-pernambuco/"],
+ rhCnn:["CNN Brasil: quem é Renan Hallais","https://www.cnnbrasil.com.br/eleicoes/quem-e-renan-hallais-candidato-ao-governo-de-pernambuco/"],
+ caCnn:["CNN Brasil: quem é Camila Falcão","https://www.cnnbrasil.com.br/eleicoes/quem-e-camila-falcao-candidata-ao-governo-de-pernambuco/"],
+ exame:["Exame: candidatos ao governo de PE","https://exame.com/brasil/eleicoes-2026-quem-sao-os-candidatos-ao-governo-do-pernambuco/"],
+ jer:["CNF-PE: Democrata lança Jeremias","https://www.cnfpe.com.br/2026/07/27/democrata-oficializa-jeremias-cosmo-como-candidato-ao-governo-de-pernambuco/"],
+ indef:["CBN Recife: TRE-PE indefere candidaturas","https://www.cbnrecife.com/2026/09/15/tre-pe-indefere-candidatura-do-professor-jeremias-do-banco-ao-governo/"],
+ maCnn:["CNN Brasil: quem é Marília Arraes","https://www.cnnbrasil.com.br/eleicoes/quem-e-marilia-arraes-candidata-ao-senado-por-pernambuco/"],
+ maProp:["Portal de Prefeitura: sabatina de Marília","https://portaldeprefeitura.com.br/bastidores-da-politica/marilia-arraes-defende-articulacao-politica-investimentos/632166/"],
+ debSen:["Jamildo: debate do Senado no g1","https://jamildo.com/politica/debate-para-o-senado-em-tom-cordial-candidatos-medem-forcas-e-apresentam-propostas-veja-principais-destaques.html"],
+ debSen2:["Blog Dellas: debate em Petrolina","https://blogdellas.com.br/debate-ao-senado-em-pe-tem-embates-sobre-bets-aliancas-e-maioridade-penal/"],
+ debSen3:["Blog Brito: resumo do debate","https://www.blogbrito.com/post/senado-em-debate"],
+ hcLJ:["Agência Brasil: STF arquiva inquérito (2021)","https://agenciabrasil.ebc.com.br/justica/noticia/2021-02/stf-arquiva-inquerito-contra-senador-investigado-na-lava-jato"],
+ hcVamp:["Gazeta do Povo: TRF absolve na Operação Vampiro","https://www.gazetadopovo.com.br/vida-publica/trf-absolve-humberto-costa-em-processo-da-operacao-vampiro-0492eins3ozcmheju8md0wnke/"],
+ efSTF:["STF: denúncia julgada improcedente (AP 1032)","https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=485753&ori=1"],
+ efQuad:["Poder360: STF rejeita “Quadrilhão do PP”","https://www.poder360.com.br/justica/stf-rejeita-denuncia-contra-lira-no-quadrilhao-do-pp/"],
+ mfJam:["Jamildo: quem é Mendonça Filho","https://jamildo.com/politica/quem-e-mendonca-filho-e-qual-seu-numero-de-urna-na-disputa-ao-senado-em-pernambuco.html"],
+ mfPL:["Gazeta do Povo: PL confirma Mendonça","https://www.gazetadopovo.com.br/eleicoes/2026/pl-confirma-mendonca-filho-como-pre-candidato-ao-senado-por-pernambuco/"],
+ mfPet:["Nill Júnior: debate em Petrolina","https://nilljunior.com.br/debate-em-petrolina-reune-candidatos-ao-senado-e-tem-propostas-para-o-sertao-bets-e-troca-de-acusacoes/"]
+};
+
+const C=[
+/* ===== GOVERNADOR ===== */
+{id:"raquel",o:"gov",n:"Raquel Lyra",num:"55",p:"PSD",age:47,x:5.6,sp:"c",spl:"Centro / centro-direita",mand:true,
+ vice:"Priscila Krause (PSD), vice-governadora atual",col:"Pernambuco de Coração: PSD, União Brasil, PP, Podemos, PSDB, Cidadania, Avante",
+ prof:"Advogada, procuradora do Estado, ex-delegada da Polícia Federal",
+ perfil:["Governadora desde 2023, a primeira mulher no cargo. Filha do ex-governador João Lyra Neto.","Começou no PSB (deputada estadual 2011–2016), foi prefeita de Caruaru pelo PSDB (2017–2022) e está no PSD desde 2025.","Recebe apoio da direita pernambucana, incluindo o PL de Mendonça Filho, mas indicou apoio a Lula na disputa presidencial. Em 2022 ficou neutra no 2º turno entre Lula e Bolsonaro.","Discurso centrado em gestão, obras e continuidade. Plano com 6 eixos e mais de 100 páginas, sob o lema de que a transformação não pode parar."],
+ prop:[["Segurança","Ampliar o programa Juntos pela Segurança; contratar 10 mil novos agentes; 7 novos batalhões da PM, 4 BIESPs e 10 de policiamento turístico; zerar o déficit de vagas no sistema prisional; ampliar Patrulha Maria da Penha."],["Educação","Concluir e equipar 250 creches, com 60 mil vagas na educação infantil."],["Saúde","Reestruturar a rede hospitalar de média e alta complexidade, requalificar o Hospital da Restauração e ampliar telemedicina."],["Água e obras","Concluir adutoras do Agreste e do Sertão; Arco Metropolitano, duplicação da BR-232 e da PE-60, programa PE na Estrada, Transnordestina."],["Mobilidade","Recuperar o metrô com o governo federal, 100 ônibus elétricos, manter a tarifa única na RMR, ciclovias na PE-035 e na Estrada de Aldeia."],["Economia e moradia","Meta de tornar PE o maior polo de inovação do Nordeste até 2030; ampliar o Morar Bem Pernambuco; agricultura familiar."]],
+ hist:["Governo: criou o Juntos pela Segurança; diz ter investido mais de R$ 2 bilhões no programa (dado da campanha).","Aprovação de 59% e desaprovação de 33% na Quaest de 25–28/9/2026.","Prefeita de Caruaru: eleita em 2016 e reeleita em 2020 no 1º turno com 66,9%.","Deputada estadual por dois mandatos; presidiu a Comissão de Justiça da Alepe.","Críticas da oposição: no debate da Globo, Ivan Moraes cobrou R$ 300 milhões do programa Sertão Vivo que não chegaram às famílias; ela atribuiu o atraso a trâmites com o BNDES."],
+ cases:[{t:"Suposto “gabinete do ódio”",st:"Em apuração",d:"Reportagem da TV Record (ago/2026) apontou um servidor da Caixa cedido ao governo estadual como coordenador de perfis que atacavam João Campos nas redes. A coligação de Campos levou o caso à Justiça Eleitoral. Raquel nega, diz que o servidor foi desligado e acusa a oposição de ter estrutura semelhante. Não há conclusão das autoridades.",s:["odio","odio2"]},
+  {t:"Suposto monitoramento de aliados de João Campos",st:"Em apuração",d:"Em janeiro de 2026, o ministro Gilmar Mendes (STF) mandou a PF apurar se a Polícia Civil monitorou indevidamente um secretário da Prefeitura do Recife e o irmão dele, e suspendeu uma apuração do MPPE. A decisão diz que não cabe, por ora, atribuir responsabilidade às altas autoridades do Estado. O governo nega espionagem e diz que eram investigações regulares sobre a prefeitura.",s:["espiao"]},
+  {t:"Alvo de cartazes anônimos",st:"Vítima",closed:true,d:"Em agosto de 2026 surgiram cartazes no Recife acusando-a, sem qualquer base, de ter matado o marido. Ela registrou ocorrência; a coligação adversária e Ivan Moraes também pediram investigação.",s:["rlBio"]}],
+ src:["rlPlano","rl10mil","seg","mob","rlAprov","rlBio","rlLula","odio","espiao","debateGov","cnnGov","wiki"]},
+
+{id:"joao",o:"gov",n:"João Campos",num:"40",p:"PSB",age:32,x:3.5,sp:"e",spl:"Centro-esquerda",mand:true,
+ vice:"Carlos Costa (Republicanos)",col:"Frente Popular: PSB, PT, PCdoB, PV, PDT, MDB, Republicanos, PRD, Solidariedade, Mobiliza, Agir",
+ prof:"Engenheiro civil (UFPE)",
+ perfil:["Ex-prefeito do Recife (2021 a abril de 2026, quando renunciou para concorrer). Filho de Eduardo Campos e bisneto de Miguel Arraes.","Presidente nacional do PSB desde 2025. Tem apoio oficial do PT e se apresenta como candidato de Lula em PE.","Plano de 178 propostas em 15 eixos, com foco em levar ao estado programas que criou no Recife."],
+ prop:[["Segurança","Pacto Anti-Facção para atacar o dinheiro do crime organizado; nomear mais de 8 mil policiais; governador no comando semanal do Pacto pela Vida; Centro de Operações Metropolitano; COMPAZ no interior; Delegacias da Mulher de 15 para 24, todas 24h."],["Educação","Ensino médio integral para todos; climatizar todas as salas da rede estadual; volta do Ganhe o Mundo; 10 mil vagas do Embarque Digital no interior; campus da UPE da Moda em Caruaru."],["Saúde","Hospital da Criança do Agreste (Caruaru); hospital de trauma e cardiologia em Petrolina; inteligência artificial na regulação de filas e leitos; Mãe Coruja Atípica para crianças autistas."],["Social","Isenção de IPVA para motos de até 180cc de trabalhadores de aplicativo; fim da tarifa mínima da Compesa em áreas de rodízio; ampliar o Chapéu de Palha."],["Infraestrutura","Transnordestina Salgueiro–Suape, Arco Metropolitano, triplicação da BR-101 no Contorno, novas licitações de ônibus por desempenho, modernização do metrô."]],
+ hist:["Reeleito prefeito em 2024 no 1º turno com 78,11%, a maior votação da história do Recife.","Gestão destacou a ampliação de vagas em creches (cerca de 70% a mais, segundo a CartaCapital), obras de contenção de encostas, novos COMPAZ e o Embarque Digital.","Deputado federal mais votado de PE em 2018; deixou o cargo ao assumir a prefeitura."],
+ cases:[{t:"Contratos de engenharia da Prefeitura do Recife",st:"Em apuração",d:"TCE-PE, MPF e Gaeco/MPPE apuram contratos com Sinarco, Alca Engenharia e Max Construções: adesão a atas de outros estados sem licitação própria, subcontratação e pagamentos em duplicidade. Auditoria técnica do TCE noticiada em junho de 2026 estima prejuízo de R$ 16,2 milhões em contratos da Educação, com sobrepreço acima de 100% em energia solar. A prefeitura nega irregularidades. Não há julgamento.",s:["jcMPF","jcTCE"]},
+  {t:"Obras do Parque Governador Eduardo Campos",st:"Em apuração",d:"Relatório do TCE-PE apontou possível fragmentação de licitações e sobrepreço nas obras do parque, no Pina.",s:["jcParque"]},
+  {t:"Acusações de “gabinete do ódio”",st:"Acusador",closed:true,d:"Campos é quem acusa o governo estadual; a campanha de Raquel também o acusa de manter estrutura de ataques. Ver ficha de Raquel Lyra.",s:["odio"]}],
+ src:["jcPlano","seg","mob","jc2024","jcCreche","jcMPF","jcTCE","jcParque","cnnGov","wiki"]},
+
+{id:"ivan",o:"gov",n:"Ivan Moraes",num:"50",p:"PSOL",age:50,x:1.6,sp:"e",spl:"Esquerda",mand:true,
+ vice:"Alice Gabino (Rede)",col:"Frente de Luta: PSOL, Rede, PCB",prof:"Jornalista, mestre em Comunicação (UFPE)",
+ perfil:["Ex-vereador do Recife por dois mandatos (eleito em 2016 e 2020). Criou e apresentou o programa de TV Pé na Rua.","Critica o que chama de revezamento de herdeiros no comando do estado. Apoia Lula para presidente.","Plano “Por um bem-viver em Pernambuco”, com 254 propostas."],
+ prop:[["Transporte","Tarifa Zero em ônibus e metrô sob gestão estadual, começando pela RMR, Caruaru e Petrolina; custo estimado em R$ 1,1 bi por ano, com fundo pago por empresas maiores e recursos federais; remunerar empresas pelo serviço prestado, não por passageiro."],["Segurança","Câmeras corporais nos policiais; investir em perícia e DHPP para elucidar homicídios; reduzir a letalidade policial; mediação de conflitos nas comunidades."],["Saúde e social","Prioridade à atenção básica; plano de cannabis medicinal; saúde mental; programa estadual de habitação popular; educação sexual nas escolas."],["Meio ambiente","Desmatamento zero, reciclagem e compostagem, Compesa mantida pública."]],
+ hist:["Como vereador, fazia prestação de contas semanal dentro dos ônibus do Recife.","Exerceu suplência de deputado estadual após a eleição de 2022."],
+ cases:[],src:["ivCnn","ivTz","mob","seg","cnnGov"]},
+
+{id:"renan",o:"gov",n:"Renan Hallais",num:"14",p:"Missão",age:36,x:7.5,sp:"d",spl:"Direita liberal",mand:false,
+ vice:"Lucas Xavier (Missão)",col:"Sem coligação",prof:"Contador, pós em finanças; influenciador digital",
+ perfil:["Ligado ao MBL, de cuja coordenação estadual faz parte. Nasceu no Rio de Janeiro.","Disputou vaga de vereador no Recife em 2024 e não foi eleito. Primeira disputa ao governo.","Plano com linguagem de gestão: metas, transparência e incentivos atrelados a desempenho."],
+ prop:[["Segurança","Plano Decenal de Segurança com metas públicas e orçamento protegido de cortes; sistema de monitoramento do déficit de efetivo; integração de dados entre PM, Polícia Civil e presídios; operações de retomada territorial."],["Economia","Simplificação tributária para pequenas empresas; incentivos fiscais vinculados a metas; polos produtivos no interior."],["Educação","Escolas técnicas estaduais geridas por consórcios empresariais; agentes de segurança como mediadores em 80 escolas."],["Mobilidade","Integração de metrô, BRT e ônibus com bilhete único; corredores e sinalização para reduzir mortes de motociclistas; estradas vicinais."]],
+ hist:["Nunca exerceu mandato.","O Diario de Pernambuco observou que o plano não menciona violência contra a mulher nem ciclovias."],
+ cases:[],src:["rhCnn","seg","mob","edu","cnnGov"]},
+
+{id:"camila",o:"gov",n:"Professora Camila",num:"80",p:"UP",age:37,x:0.7,sp:"e",spl:"Esquerda radical",mand:false,
+ vice:"Marcelo Pessoa (UP)",col:"Sem coligação",prof:"Historiadora (UFRPE), professora de educação popular",
+ perfil:["Camila Falcão é vice-presidente estadual da Unidade Popular. Natural de Vitória de Santo Antão.","Atua no Movimento de Mulheres Olga Benário e no Movimento de Luta nos Bairros, Vilas e Favelas. Primeira eleição."],
+ prop:[["Serviços públicos","Fim das privatizações, incluindo metrô, energia e saneamento; extinguir PPPs e terceirizações."],["Educação","Fim do vestibular; 10% do PIB estadual para a educação pública."]],
+ hist:["Nunca exerceu mandato."],cases:[],src:["caCnn","edu","cnnGov"]},
+
+{id:"guilherme",o:"gov",n:"Guilherme Fonseca",num:"16",p:"PSTU",age:68,x:0.45,sp:"e",spl:"Esquerda radical",mand:false,
+ vice:"Valéria Félix (PSTU)",col:"Sem coligação",prof:"Técnico em eletricidade, eletrônica e telecomunicações",
+ perfil:["Militante histórico da esquerda: participou da fundação do PT e da CUT no estado e depois ajudou a criar o PSTU.","Disputou o Senado em 1994 e a vice-governança em 1998, sem ser eleito."],
+ prop:[["Educação","Revogar a BNCC e o Novo Ensino Médio."],["Serviços públicos","Extinguir PPPs e terceirizações."]],
+ hist:["Nunca exerceu mandato."],cases:[],src:["cnnGov","exame","edu"]},
+
+{id:"victor",o:"gov",n:"Victor Assis",num:"29",p:"PCO",age:31,x:0.3,sp:"e",spl:"Esquerda radical",mand:false,
+ vice:"Roberta Rita (PCO)",col:"Sem coligação",prof:"Jornalista e redator",
+ perfil:["Dirigente nacional do PCO e trabalha em veículos ligados ao partido.","Foi candidato a prefeito do Recife (2020 e 2024) e a deputado federal (2018 e 2022), sem ser eleito."],
+ prop:[["Plano","As fontes consultadas não detalham as propostas. Consulte o plano no DivulgaCandContas."]],
+ hist:["Nunca exerceu mandato."],cases:[],src:["cnnGov","tse"]},
+
+{id:"jeremias",o:"gov",n:"Professor Jeremias",num:"35",p:"Democrata",age:46,x:9.1,sp:"d",spl:"Direita conservadora",mand:false,indef:true,
+ vice:"Carlos Alberto (Democrata)",col:"Sem coligação",prof:"Professor da rede estadual e bancário do Banco do Brasil",
+ perfil:["Jeremias Cosmo, natural de Palmares e criado em Ribeirão. Dirigente sindical.","Declara-se de direita e apoiador de Jair Bolsonaro e de Flávio Bolsonaro.","Trajetória partidária variada: candidato a deputado estadual pelo PSOL (2018), a vereador pelo PP (2020) e a vice-prefeito pelo Agir (2024)."],
+ prop:[["Segurança","Mais estrutura e autoridade para a Polícia Militar no combate às facções."]],
+ hist:["Nunca exerceu mandato."],
+ cases:[{t:"Candidatura indeferida",st:"Indeferida no TRE-PE",d:"Em setembro de 2026 o TRE-PE indeferiu a candidatura por descumprimento da cota de gênero do partido e irregularidades no diretório estadual. O caso pode chegar ao TSE.",s:["indef"]}],
+ src:["jer","indef","exame"]},
+
+/* ===== SENADO ===== */
+{id:"marilia",o:"sen",n:"Marília Arraes",num:"123",p:"PDT",age:42,x:3.4,sp:"e",spl:"Centro-esquerda",mand:true,
+ vice:"Suplentes: Abel Neto e Edjane Figueiredo (PSB)",col:"Frente Popular (chapa de João Campos)",prof:"Advogada",
+ perfil:["Neta de Miguel Arraes e prima de João Campos. Presidente do PDT em PE.","Passou por PSB, PT e Solidariedade antes do PDT. Perdeu para João Campos o 2º turno do Recife em 2020 e para Raquel Lyra o 2º turno de governador em 2022.","Defende um Senado que apoie a governabilidade de Lula."],
+ prop:[["Trabalho","Fim da escala 6x1, projeto do qual é coautora."],["Mulheres","Delegacias da Mulher 24h em todo o estado; saúde da mulher no climatério."],["Saúde","Quebra de patentes das canetas emagrecedoras para oferta no SUS; interiorizar média e alta complexidade."],["Educação","Pé-de-Meia Universitário; creches nas universidades federais."],["Desenvolvimento","Revisão do pacto federativo e do fundo de desenvolvimento regional; Transnordestina; Polo de Confecções do Agreste."]],
+ hist:["Secretária estadual de Juventude e Emprego (2007–2008).","Vereadora do Recife (2009–2019).","Deputada federal (2019–2023)."],
+ cases:[],src:["senado","maCnn","maProp","debSen","wiki"]},
+
+{id:"humberto",o:"sen",n:"Humberto Costa",num:"130",p:"PT",age:69,x:2.4,sp:"e",spl:"Esquerda",mand:true,
+ vice:"Suplentes: Luciano Bivar (MDB) e Prof. Manoel Moraes (PT)",col:"Frente Popular (chapa de João Campos)",prof:"Médico",
+ perfil:["Senador desde 2011, busca o terceiro mandato. Uma das principais lideranças do PT no Nordeste.","Faz dobradinha com Marília Arraes e defende o governo Lula."],
+ prop:[["Fiscal","Equilíbrio fiscal sem cortar políticas sociais; transparência nas emendas parlamentares."],["Saúde","Interiorizar serviços de saúde."],["Obras","Barragens e drenagem na Mata Norte e Mata Sul; incluir a Transnordestina no Novo PAC."]],
+ hist:["Ministro da Saúde (2003–2005): cita a criação do SAMU, da Farmácia Popular e do Brasil Sorridente.","Senador: integrou a CPI da Pandemia e presidiu a Comissão de Direitos Humanos.","Antes: deputado estadual (1990–93), deputado federal (1995–99), vereador do Recife (2001–05), secretário estadual das Cidades (2007–10)."],
+ cases:[{t:"Operação Vampiro (2004)",st:"Absolvido",closed:true,d:"Investigação da PF sobre fraude na compra de hemoderivados no Ministério da Saúde. Foi denunciado em 2006 e absolvido por unanimidade pelo TRF-5 em 2008, por falta de provas, a pedido do próprio Ministério Público.",s:["hcVamp"]},
+  {t:"Lava Jato (delação de Paulo Roberto Costa)",st:"Arquivado",closed:true,d:"Inquérito aberto em 2015 sobre suposto R$ 1 milhão para a campanha de 2010. A PF pediu arquivamento por falta de indícios e a 2ª Turma do STF arquivou o caso em fevereiro de 2021, por 3 votos a 2.",s:["hcLJ"]}],
+ src:["senado","debSen","debSen3","hcLJ","hcVamp","wiki"]},
+
+{id:"mendonca",o:"sen",n:"Mendonça Filho",num:"222",p:"PL",age:60,x:8.1,sp:"d",spl:"Direita",mand:true,
+ vice:"Suplentes: Adriana Ferreira e Alcides Cardoso (PL)",col:"Sem coligação; apoia Raquel Lyra para governadora",prof:"Administrador",
+ perfil:["Deputado federal, ex-governador e ex-ministro. Sempre esteve na oposição ao PT.","Trocou o União Brasil pelo PL em 2026 e se apresenta como o nome da direita ao Senado, alinhado a Flávio Bolsonaro."],
+ prop:[["Segurança","Endurecer penas para feminicídio e estupro; parte da arrecadação das bets para segurança e presídios."],["Instituições","Mandato com prazo fixo para ministros do STF."],["Apostas","Mais restrições às bets."]],
+ hist:["Ministro da Educação (2016–2018, governo Temer): implantou o Novo Ensino Médio e homologou a BNCC. O Novo Ensino Médio recebeu críticas de educadores e foi reformulado pelo Congresso em 2024.","Relator da PEC da Segurança Pública na Câmara.","Governador (2006), vice-governador (1999–2006), deputado estadual (1987–95), deputado federal em vários mandatos."],
+ cases:[],src:["senado","mfJam","mfPL","mfPet","debSen","debSen2"]},
+
+{id:"eduardo",o:"sen",n:"Eduardo da Fonte",num:"111",p:"PP",age:53,x:6.6,sp:"d",spl:"Centro-direita",mand:true,
+ vice:"Suplentes: Carlos Andrade Lima (União) e Jane Santos (PP)",col:"Pernambuco de Coração (chapa de Raquel Lyra)",prof:"Empresário",
+ perfil:["Deputado federal desde 2007 e ex-líder do PP na Câmara. Pai do deputado federal Lula da Fonte.","No debate, disse votar contra as bets em nome de princípios cristãos e da família."],
+ prop:[["Saúde","Prontuário eletrônico unificado no SUS; mais especialistas no interior; equipamentos oncológicos e Hospital do Câncer do Sertão do Araripe."],["Segurança","Tornozeleira eletrônica para agressores de mulheres."],["Instituições","Mandato de oito anos para ministros dos tribunais superiores."],["Fiscal","Organizar os gastos do governo e reduzir o peso dos juros sobre as famílias."]],
+ hist:["Cinco mandatos de deputado federal (2007–2026)."],
+ cases:[{t:"Lava Jato: caso UTC/Coquepar",st:"Denúncia improcedente",closed:true,d:"Virou réu em 2018 (2ª Turma do STF, 3 a 2) sob acusação de receber R$ 300 mil da UTC. Em 2022 o plenário do STF julgou a denúncia improcedente por unanimidade (AP 1032).",s:["efSTF"]},
+  {t:"“Quadrilhão do PP”",st:"Denúncia rejeitada",closed:true,d:"Tornou-se réu por organização criminosa em 2019, com Arthur Lira e Ciro Nogueira. Em março de 2021 a 2ª Turma do STF rejeitou a denúncia, por 3 a 2.",s:["efQuad"]}],
+ src:["senado","debSen3","debSen2","efSTF","efQuad","wiki"]},
+
+{id:"tulio",o:"sen",n:"Túlio Gadêlha",num:"555",p:"PSD",age:38,x:4.6,sp:"c",spl:"Centro",mand:true,
+ vice:"Suplentes: Dulci Amorim (PSD) e Cacique Marcelo Pankararu (Avante)",col:"Pernambuco de Coração (chapa de Raquel Lyra)",prof:"Servidor público",
+ perfil:["Deputado federal desde 2019. Saiu da Rede e entrou no PSD em abril de 2026 para disputar o Senado ao lado de Raquel Lyra.","Concilia a aliança local com Raquel e o apoio a Lula na disputa nacional."],
+ prop:[["Instituições","Defende mandato com prazo para ministros do STF."],["Plano","As fontes consultadas trazem poucas propostas detalhadas."]],
+ hist:["Deputado federal (2019–2026), eleito pela primeira vez em 2018."],
+ cases:[],src:["senado","debSen2","debSen3","wiki"]},
+
+{id:"paulo",o:"sen",n:"Paulo Rubem Santiago",num:"180",p:"Rede",age:71,x:1.9,sp:"e",spl:"Esquerda",mand:true,
+ vice:"Suplentes: Cristiano Romão (PCB) e Rafaela Ramos (PSOL)",col:"Frente de Luta (chapa de Ivan Moraes)",prof:"Professor",
+ perfil:["Veterano da esquerda pernambucana, candidato da federação PSOL-Rede."],
+ prop:[["Plano","Participou dos debates do g1; as fontes consultadas não detalham propostas próprias."]],
+ hist:["Vereador do Recife (1993–95), deputado estadual (1995–2003) e deputado federal (2003–2015)."],
+ cases:[],src:["senado","debSen","wiki"]},
+
+{id:"carlos",o:"sen",n:"Carlos Sant'Anna",num:"300",p:"Novo",age:50,x:7.6,sp:"d",spl:"Direita liberal",mand:false,
+ vice:"Suplentes: Carla Pinheiro e Hermes Alves (Novo)",col:"Sem coligação",prof:"Advogado",
+ perfil:["Primeira disputa eleitoral, pelo Novo, partido de linha liberal na economia."],prop:[["Plano","Consulte as propostas no DivulgaCandContas."]],
+ hist:["Nunca exerceu mandato."],cases:[],src:["senado","tse"]},
+
+{id:"gilvan",o:"sen",n:"Pastor Gilvan Costa",num:"355",p:"Democrata",age:64,x:9.2,sp:"d",spl:"Direita conservadora",mand:false,indef:true,
+ vice:"Suplentes: Laelson Costa e Pastora Simea Carvalho",col:"Sem coligação",prof:"Pastor",
+ perfil:["Candidato do mesmo partido de Professor Jeremias, no campo bolsonarista."],prop:[["Plano","Consulte as propostas no DivulgaCandContas."]],
+ hist:["Nunca exerceu mandato."],
+ cases:[{t:"Candidatura indeferida",st:"Indeferida no TRE-PE",d:"Indeferida em setembro de 2026 pelos mesmos motivos aplicados ao Democrata: cota de gênero e irregularidades no diretório.",s:["indef"]}],
+ src:["senado","indef"]},
+
+{id:"gorett",o:"sen",n:"Gorett Bitu",num:"801",p:"UP",age:69,x:0.7,sp:"e",spl:"Esquerda radical",mand:false,vice:"Suplentes: Prof. Natanael Sarmento e Sandra Ramos",col:"Sem coligação",prof:"Aposentada",perfil:["Uma das duas candidaturas da Unidade Popular."],prop:[["Plano","Consulte as propostas no DivulgaCandContas."]],hist:["Nunca exerceu mandato."],cases:[],src:["senado","tse"]},
+{id:"samuel",o:"sen",n:"Samuel Timoteo",num:"800",p:"UP",age:51,x:0.8,sp:"e",spl:"Esquerda radical",mand:false,vice:"Suplentes: Dra. Gau e Professor Bruno",col:"Sem coligação",prof:"Trabalhador da construção civil",perfil:["Uma das duas candidaturas da Unidade Popular."],prop:[["Plano","Consulte as propostas no DivulgaCandContas."]],hist:["Nunca exerceu mandato."],cases:[],src:["senado","tse"]},
+{id:"mariano",o:"sen",n:"Mariano Macedo",num:"161",p:"PSTU",age:61,x:0.45,sp:"e",spl:"Esquerda radical",mand:false,vice:"Suplentes: Jonas Ferreira e Marcelo",col:"Sem coligação",prof:"Professor",perfil:["Conhecido como Professor Mariano. Foi candidato a vice-governador pelo PSTU em 2022."],prop:[["Plano","Consulte as propostas no DivulgaCandContas."]],hist:["Nunca exerceu mandato."],cases:[],src:["senado","tse"]},
+{id:"mailson",o:"sen",n:"Mailson da Silva Neto",num:"290",p:"PCO",age:58,x:0.3,sp:"e",spl:"Esquerda radical",mand:false,vice:"Suplentes: Estelita Medeiros e Gilberto Silva",col:"Sem coligação",prof:"Engenheiro",perfil:["Candidato do PCO."],prop:[["Plano","Consulte as propostas no DivulgaCandContas."]],hist:["Nunca exerceu mandato."],cases:[],src:["senado","tse"]}
+];
+
+Object.assign(S,{
+ df_fev:["Gazeta do Povo: Datafolha fev/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/pesquisa-datafolha-governador-senador-pernambuco-fevereiro-2026/"],
+ df_abr:["g1: Datafolha abr/2026","https://g1.globo.com/pe/caruaru-regiao/eleicoes/2026/noticia/2026/04/16/datafolha-em-pernambuco-abril.ghtml"],
+ df_mai:["Gazeta do Povo: Datafolha mai/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-maio-2026/"],
+ df_jul:["Gazeta do Povo: Datafolha jul/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-julho-2026/"],
+ df_ago:["Gazeta do Povo: Datafolha ago/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-agosto-2026/"],
+ df_set2:["Gazeta do Povo: Datafolha 22–24/9","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-setembro-2026-2/"],
+ q_abr:["Gazeta do Povo: Quaest abr/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/genial-quaest-governador-senador-pernambuco-abril-2026/"],
+ q_jul:["Gazeta do Povo: Genial/Quaest jul/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/genial-quaest-governador-senador-pernambuco-julho-2026/"],
+ q_set1:["Gazeta do Povo: Quaest 4–7/9","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/quaest-governador-senador-pernambuco-setembro-2026/"],
+ q_set2:["Gazeta do Povo: Quaest set (2ª rodada)","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/quaest-governador-senador-pernambuco-setembro-2026-2/"],
+ onde:["PE360: onde assistir aos debates","https://www.pe360.com.br/noticia/5457/ribeirao/politica/onde-assistir-aos-debates-para-governador-de-pernambuco-em-2026.html"]
+});
+
+/* Séries: [data de campo (meio), Raquel, João] */
+const TREND={
+ gov:[
+  {name:"Datafolha",pts:[["2026-02-04",35,47,"df_fev"],["2026-04-14",38,50,"df_abr"],["2026-05-26",48,43,"df_mai"],["2026-07-29",48,42,"df_jul"],["2026-08-19",47,40,"df_ago"],["2026-09-09",47,42,"dfolha"],["2026-09-23",48,44,"df_set2"]]},
+  {name:"Quaest",pts:[["2026-04-24",34,42,"q_abr"],["2026-07-24",43,37,"q_jul"],["2026-09-05",43,37,"q_set1"],["2026-09-21",41,39,"q_set2"],["2026-09-27",42,42,"quaest"]]}
+ ],
+ sen:{keys:["marilia","humberto","mendonca","eduardo","tulio"],
+  pts:[["2026-04-24",[18,12,8,4,6],"q_abr"],["2026-07-24",[20,13,8,6,null],"q_jul"],["2026-09-05",[17,14,11,7,4],"q_set1"],["2026-09-21",[18,14,10,8,4],"q_set2"],["2026-09-27",[19,17,10,7,3],"quaest"]]}
+};
+const POLLS={gov:{q:{raquel:42,joao:42,ivan:1,renan:0,camila:0,guilherme:0,victor:0}},sen:{q:{marilia:19,humberto:17,mendonca:10,eduardo:7,tulio:3,gilvan:1,carlos:1,paulo:0,samuel:0,gorett:0,mailson:0,mariano:0}}};
+const LATEST=[
+ {t:"Governador · Quaest, 25 a 28/9",d:{raquel:42,joao:42,ivan:1},n:"Brancos/nulos 5%, indecisos 10%. 2º turno: Raquel 44% × João 44%. 1.302 entrevistas, reg. PE-00324/2026.",s:"quaest"},
+ {t:"Governador · Datafolha, 22 a 24/9",d:{raquel:48,joao:44},n:"Demais candidatos somam 2%; brancos, nulos e indecisos 6%. 2º turno: Raquel 51% × João 45%. 1.204 entrevistas.",s:"df_set2"},
+ {t:"Senado · Quaest, 25 a 28/9",d:{marilia:19,humberto:17,mendonca:10,eduardo:7,tulio:3,gilvan:1,carlos:1},n:"Soma do 1º e 2º voto, reduzida a 100%. Brancos/nulos 19%, indecisos 23%.",s:"quaest"},
+ {t:"Senado · Datafolha, 22 a 24/9",d:{marilia:19,humberto:17,mendonca:13,eduardo:10,tulio:6},n:"Outros somam 7%; brancos, nulos e indecisos 29%. Método de contagem diferente da Quaest.",s:"df_set2"}
+];
+const DEBATES=[
+ {date:"2026-10-01",o:"Governador",org:"TV Jornal (SBT) e Sistema Jornal do Commercio",when:"10h45 às 13h",who:"Candidatos ao governo",note:"Último debate antes do 1º turno. Transmissão na TV aberta e nas plataformas digitais do JC.",links:[["Onde assistir","onde"]]},
+ {date:"2026-09-29",o:"Governador",org:"TV Globo Pernambuco",when:"Noite, após a novela",who:"Raquel Lyra, João Campos e Ivan Moraes",note:"Mediação de Márcio Bonfim, com checagem do Fato ou Fake. Íntegra no g1 e no Globoplay.",links:[["Íntegra no g1 Pernambuco","https://g1.globo.com/pe/pernambuco/eleicoes/2026/"],["Destaques (Brasil de Fato)","debateGov"]]},
+ {date:"2026-09-22",o:"Senado",org:"Rádio Grande Rio FM, Petrolina",when:"Manhã",who:"Humberto Costa, Marília Arraes, Mendonça Filho, Eduardo da Fonte e Túlio Gadêlha",note:"Embates sobre bets, alianças, maioridade penal e obras do Sertão.",links:[["Resumo (Nill Júnior)","mfPet"],["Resumo (Blog Dellas)","debSen2"]]},
+ {date:"2026-09-21",o:"Governador",org:"TV Guararapes (Record)",when:"18h às 19h55",who:"Raquel Lyra, João Campos e Ivan Moraes",note:"Transmitido no canal 9 e no YouTube da emissora.",links:[["Assistir no YouTube","https://www.youtube.com/watch?v=YP8I83TnxcA"],["Melhores momentos (Nill Júnior)","https://nilljunior.com.br/assista-ao-debate-com-candidatos-ao-governo-de-pernambuco/"]]},
+ {date:"2026-09-10",o:"Senado",org:"Rádio Cultura do Nordeste, Diario de Pernambuco e TV Nova",when:"20h55, Caruaru",who:"Eduardo da Fonte, Humberto Costa, Marília Arraes, Mendonça Filho, Paulo Rubem Santiago e Túlio Gadêlha",note:"Realizado no Senac Caruaru. O vídeo está incorporado na página do Diario.",links:[["Assistir (Diario de PE)","https://www.diariodepernambuco.com.br/politica/2026/09/11723598-candidatos-ao-senado-por-pernambuco-participam-de-debate-veja-ao-vivo.html"]]},
+ {date:"2026-09-02",o:"Senado",org:"g1 Pernambuco",when:"14h",who:"Eduardo da Fonte, Humberto Costa, Marília Arraes, Mendonça Filho, Paulo Rubem Santiago e Túlio Gadêlha",note:"Seis temas sorteados, mediação de Márcio Bonfim. Transmitido no g1, YouTube, TikTok e Instagram.",links:[["Íntegra no g1 Pernambuco","https://g1.globo.com/pe/pernambuco/eleicoes/2026/"],["Destaques (Jamildo)","debSen"]]}
+];
+
+let office="gov",sel=null,dtab="perfil";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const href=k=>k.startsWith("http")?k:S[k][1];
+const pollOf=c=>POLLS[c.o]&&POLLS[c.o].q[c.id];
+const ini=n=>n.replace(/^(Professora?|Pastor) /,"").split(" ").filter(w=>w.length>2||/^[A-Z]/.test(w)).map(w=>w[0]).filter(ch=>/[A-ZÁÉÍÓÚÂÊÔÃÕÇ]/.test(ch)).slice(0,2).join("");
+const av=(c,cls="")=>`<span class="av sp-${c.sp} ${cls}" aria-hidden="true">${c.photo?`<img src="${c.photo}" alt="">`:ini(c.n)}</span>`;
+const byId=id=>C.find(x=>x.id===id);
+const kc=(n,c="")=>`<span class="kc ${c}" aria-label="número ${n}">${[...n].map(d=>"<i>"+d+"</i>").join("")}</span>`;
+const fmtD=s=>{const d=new Date(s+"T12:00:00");return d.getDate()+"/"+(d.getMonth()+1)};
+
+/* tema */
+function applyTheme(t){if(t)document.documentElement.setAttribute("data-theme",t);
+ const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+ document.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===cur));}
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{applyTheme(b.dataset.t);try{localStorage.setItem("pe26theme",b.dataset.t)}catch(e){};if(office==="pol")renderPolls()});
+applyTheme();
+
+const narrow=()=>matchMedia("(max-width:640px)").matches;
+function renderLanes(list){
+  const L=$("#lanes");L.innerHTML="";
+  if(narrow()){L.style.height="auto";const sorted=[...list].sort((a,b)=>a.x-b.x);
+    L.innerHTML='<div class="vhead"><span>Candidato</span><span class="vax"><span>Esq.</span><span>Centro</span><span>Dir.</span></span></div><div class="vlist">'+
+    sorted.map(c=>`<button class="vrow${sel===c.id?" on":""}" data-id="${c.id}"><span class="nm">${av(c)}<span>${esc(c.n)}</span></span><span class="vtrack" aria-label="${esc(c.spl)}"><i style="left:${c.x*10}%"></i></span></button>`).join("")+"</div>";
+    L.querySelectorAll(".vrow").forEach(b=>b.onclick=()=>select(b.dataset.id,true));return}
+  const sorted=[...list].sort((a,b)=>a.x-b.x);const TW=L.clientWidth||600;const rows=[];const els=[];
+  sorted.forEach(c=>{const b=document.createElement("button");b.className="dot"+(sel===c.id?" on":"");b.innerHTML=av(c)+esc(c.n);b.title=c.p+" · "+c.num;
+    b.style.transform="none";b.style.left="0px";b.onclick=()=>select(c.id,true);L.appendChild(b);
+    const w=b.offsetWidth;let left=Math.min(Math.max(c.x/10*TW-w/2,0),TW-w);
+    let r=0;while(rows[r]!==undefined&&rows[r]>left-6)r++;rows[r]=left+w;els.push([b,left,r])});
+  const H=rows.length*36+6;L.style.height=H+"px";
+  els.forEach(([b,left,r])=>{b.style.left=left+"px";b.style.top=(H-36-r*36+4)+"px"});
+}
+function renderGrid(){
+  const q=$("#q").value.trim().toLowerCase(),sp=$("#sp").value,m=$("#mand").checked;
+  const base=C.filter(c=>c.o===office);
+  const list=base.filter(c=>(!sp||c.sp===sp)&&(!m||c.mand)&&(!q||JSON.stringify([c.n,c.p,c.perfil,c.prop,c.spl]).toLowerCase().includes(q)));
+  list.sort((a,b)=>(pollOf(b)??-1)-(pollOf(a)??-1)||a.n.localeCompare(b.n));
+  renderLanes(base);
+  $("#list-title").textContent=office==="gov"?"Candidatos a governador":"Candidatos ao Senado";
+  $("#grid").innerHTML=list.length?list.map(c=>{const p=pollOf(c);
+   return `<button class="card${sel===c.id?" on":""}" data-id="${c.id}">
+    <div class="who">${av(c)}<div style="min-width:0"><h3>${esc(c.n)}</h3><div class="meta">${esc(c.p)} · ${kc(c.num)}</div></div></div>
+    <div class="tags"><span class="tag sp-${c.sp}">${esc(c.spl)}</span>${c.mand?'<span class="tag ok">Já teve mandato</span>':""}${c.cases.some(k=>!k.closed)?'<span class="tag flag">'+(c.indef?"Indeferida":"Caso em apuração")+'</span>':""}${c.cases.some(k=>k.closed&&k.st!=="Vítima"&&k.st!=="Acusador")?'<span class="tag">Caso encerrado</span>':""}</div>
+    ${p!==undefined?`<div class="pbar"><div class="bar"><i style="width:${Math.max(p,1)*2}%"></i></div><span>Quaest <b>${p}%</b></span></div>`:""}
+   </button>`}).join(""):'<p class="none">Nenhum candidato com esses filtros.</p>';
+  document.querySelectorAll(".card").forEach(b=>b.onclick=()=>select(b.dataset.id,true));
+}
+function renderDetail(){
+  const c=byId(sel);const D=$("#detail");
+  if(!c){D.innerHTML='<p class="none">Escolha um candidato para ver a ficha.</p>';return}
+  const T=[["perfil","Perfil"],["prop","Propostas"],["hist","O que já fez"],["cases","Escândalos e processos"+(c.cases.length?" ("+c.cases.length+")":"")],["src","Fontes"]];
+  let body="";
+  if(dtab==="perfil")body=`<dl class="facts"><div><dt class="label">${c.o==="gov"?"Vice":"Suplentes"}</dt><dd>${esc(c.vice.replace("Suplentes: ",""))}</dd></div><div><dt class="label">Profissão</dt><dd>${esc(c.prof)}</dd></div><div><dt class="label">Coligação</dt><dd>${esc(c.col)}</dd></div><div><dt class="label">Espectro estimado</dt><dd>${esc(c.spl)}</dd></div></dl><ul>${c.perfil.map(p=>"<li>"+esc(p)+"</li>").join("")}</ul>`;
+  if(dtab==="prop")body="<ul>"+c.prop.map(([a,t])=>`<li><b>${esc(a)}.</b> ${esc(t)}</li>`).join("")+"</ul>";
+  if(dtab==="hist")body="<ul>"+c.hist.map(h=>"<li>"+esc(h)+"</li>").join("")+"</ul>";
+  if(dtab==="cases")body=c.cases.length?c.cases.map(k=>`<div class="case${k.closed?" closed":""}"><span class="status${k.closed?" closed":""}">${esc(k.st)}</span><h4>${esc(k.t)}</h4><p>${esc(k.d)}</p><div class="src">${k.s.map(s=>`<a href="${S[s][1]}" target="_blank" rel="noopener">${esc(S[s][0])}</a>`).join(" · ")}</div></div>`).join(""):'<p class="none">Nenhuma investigação, processo ou escândalo relevante encontrado nas fontes consultadas.</p>';
+  if(dtab==="src")body='<ul class="src">'+c.src.map(s=>`<li><a href="${S[s][1]}" target="_blank" rel="noopener">${esc(S[s][0])}</a></li>`).join("")+`<li><a href="${S.tse[1]}" target="_blank" rel="noopener">Plano de governo e bens: DivulgaCandContas (TSE)</a></li></ul>`;
+  D.innerHTML=`<div class="dhead">${av(c)}<div><div class="label">${c.o==="gov"?"Governador":"Senado"} · nº ${c.num}${c.indef?" · indeferida no TRE-PE":""}</div><h2>${esc(c.n)}</h2><div class="meta">${esc(c.p)} · ${c.age} anos</div></div>${kc(c.num,"lg")}</div>
+  <div class="dtabs" role="tablist">${T.map(([k,l])=>`<button class="dtab" role="tab" data-k="${k}" aria-selected="${dtab===k}">${l}</button>`).join("")}</div>
+  <div class="dbody">${body}</div>`;
+  D.querySelectorAll(".dtab").forEach(b=>b.onclick=()=>{dtab=b.dataset.k;renderDetail()});
+}
+function select(id,scroll){sel=id;dtab="perfil";renderGrid();renderDetail();if(scroll)$("#detail").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
+
+/* gráfico de linhas */
+const wide=new Set();
+function lineChart({id,series,ymax,ticks,title,note}){
+  const big=wide.has(id);const cw=($("#charts").clientWidth||560)-26;const W=Math.round(Math.max(300,Math.min(big?960:560,big?cw:(cw>=940?(cw-12)/2:cw)))),H=big?Math.round(Math.max(300,Math.min(400,W*.45))):Math.round(Math.max(230,Math.min(260,W*.5))),m={l:34,r:108,t:16,b:30};const iw=W-m.l-m.r,ih=H-m.t-m.b;
+  const t0=+new Date("2026-02-01"),t1=+new Date("2026-10-04");
+  const X=d=>m.l+(+new Date(d)-t0)/(t1-t0)*iw,Y=v=>m.t+ih-v/ymax*ih;
+  let g=ticks.map(v=>`<line x1="${m.l}" x2="${m.l+iw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)" stroke-width="1"/><text x="${m.l-6}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--ink-3)">${v}%</text>`).join("");
+  const months=[["2026-02-01","fev"],["2026-04-01","abr"],["2026-06-01","jun"],["2026-08-01","ago"],["2026-10-01","out"]];
+  g+=months.map(([d,l])=>`<text x="${X(d)}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--ink-3)">${l}</text>`).join("");
+  g+=`<line x1="${X("2026-10-04")}" x2="${X("2026-10-04")}" y1="${m.t}" y2="${m.t+ih}" stroke="var(--ink-3)" stroke-dasharray="3 3"/><text x="${X("2026-10-04")-4}" y="${m.t+10}" text-anchor="end" font-size="10.5" fill="var(--ink-3)">eleição</text>`;
+  let ends=series.map(s=>{const p=s.pts.filter(q=>q[1]!=null);const l=p[p.length-1];return {s,y:Y(l[1]),v:l[1]}}).sort((a,b)=>a.y-b.y);
+  for(let i=1;i<ends.length;i++)if(ends[i].y-ends[i-1].y<13)ends[i].y=ends[i-1].y+13;
+  series.forEach(s=>{const p=s.pts.filter(q=>q[1]!=null);
+    g+=`<path d="${p.map((q,i)=>(i?"L":"M")+X(q[0]).toFixed(1)+" "+Y(q[1]).toFixed(1)).join(" ")}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    p.forEach(q=>{g+=`<circle cx="${X(q[0])}" cy="${Y(q[1])}" r="4" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/><circle class="hit" cx="${X(q[0])}" cy="${Y(q[1])}" r="12" fill="transparent" data-tip="${esc(s.label)}: ${q[1]}% · campo ${fmtD(q[0])}${q[2]?" · "+esc(q[2]):""}"/>`})});
+  ends.forEach(e=>{const p=e.s.pts.filter(q=>q[1]!=null);const l=p[p.length-1];g+=`<text x="${X(l[0])+8}" y="${e.y+4}" font-size="11.5" font-weight="600" fill="var(--ink)">${esc(e.s.short)} ${e.v}%</text>`});
+  g=g.replace(/<(\w+)([^>]*?)(\/?)>/g,(m,tag,attrs,sl)=>{const st=[];attrs=attrs.replace(/ (fill|stroke)="(var\([^"]+\))"/g,(x,k,v)=>{st.push(k+":"+v);return""});return `<${tag}${attrs}${st.length?` style="${st.join(";")}"`:""}${sl}>`});
+  const leg=series.map(s=>`<span><i style="background:${s.color}"></i>${esc(s.label)}</span>`).join("");
+  return `<div class="panel chart${big?" wide":""}" id="ch-${id}"><div class="chead"><h3>${title}</h3><button class="xbtn" data-ch="${id}" aria-expanded="${big}">${big?"Reduzir":"Expandir"}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${big?'<path d="M9 4v5H4M15 20v-5h5M4 9l6-6M20 15l-6 6"/>':'<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>'}</svg></button></div><div class="legend">${leg}</div><div class="svgwrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}">${g}</svg><div class="tip" hidden></div></div><div class="cnote">${note}</div></div>`;
+}
+function renderPolls(){
+  const gc={raquel:"var(--s1)",joao:"var(--s2)"};
+  let html="";
+  TREND.gov.forEach(p=>{html+=lineChart({id:p.name.toLowerCase(),title:"Governador · "+p.name,ymax:60,ticks:[0,20,40,60],
+    series:[{label:"Raquel Lyra",short:"Raquel",color:gc.raquel,pts:p.pts.map(q=>[q[0],q[1]])},{label:"João Campos",short:"João",color:gc.joao,pts:p.pts.map(q=>[q[0],q[2]])}],
+    note:`${p.pts.length} rodadas. `+p.pts.map(q=>`<a href="${href(q[3])}" target="_blank" rel="noopener">${fmtD(q[0])}</a>`).join(" · ")})});
+  const sk=TREND.sen.keys,cols=["var(--s1)","var(--s2)","var(--s3)","var(--s4)","var(--s5)"];
+  html+=lineChart({id:"senado",title:"Senado · Quaest",ymax:25,ticks:[0,5,10,15,20,25],
+    series:sk.map((k,i)=>({label:byId(k).n,short:byId(k).n.split(" ")[0],color:cols[i],pts:TREND.sen.pts.map(q=>[q[0],q[1][i]])})),
+    note:"Soma do 1º e 2º voto, reduzida a 100%. Em abril ainda constavam Miguel Coelho e Anderson Ferreira, que desistiram. "+TREND.sen.pts.map(q=>`<a href="${href(q[2])}" target="_blank" rel="noopener">${fmtD(q[0])}</a>`).join(" · ")});
+  const rows=[];TREND.gov.forEach(p=>p.pts.forEach(q=>rows.push([q[0],"Governador",p.name,`Raquel ${q[1]}% · João ${q[2]}%`])));
+  TREND.sen.pts.forEach(q=>rows.push([q[0],"Senado","Quaest",sk.map((k,i)=>q[1][i]==null?"":byId(k).n.split(" ")[0]+" "+q[1][i]+"%").filter(Boolean).join(" · ")]));
+  rows.sort((a,b)=>a[0]<b[0]?1:-1);
+  html+=`<details class="tbl panel" style="padding:12px 16px;grid-column:1/-1"><summary>Ver todos os números em tabela</summary><div class="tblwrap"><table><thead><tr><th>Campo</th><th>Cargo</th><th>Instituto</th><th>Resultado</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${fmtD(r[0])}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join("")}</tbody></table></div></details>`;
+  $("#charts").innerHTML=html;
+  document.querySelectorAll(".xbtn").forEach(b=>b.onclick=()=>{const id=b.dataset.ch;wide.has(id)?wide.delete(id):wide.add(id);renderPolls();
+    const el=$("#ch-"+b.dataset.ch);if(el)el.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"});});
+  document.querySelectorAll(".svgwrap").forEach(w=>{const tip=w.querySelector(".tip"),svg=w.querySelector("svg");
+    w.querySelectorAll(".hit").forEach(h=>{const show=()=>{const r=svg.getBoundingClientRect(),wr=w.getBoundingClientRect(),vb=svg.viewBox.baseVal;
+      tip.textContent=h.dataset.tip;tip.hidden=false;tip.style.left=(r.left-wr.left+w.scrollLeft+(+h.getAttribute("cx"))*r.width/vb.width)+"px";tip.style.top=(r.top-wr.top+(+h.getAttribute("cy"))*r.height/vb.height-6)+"px"};
+      h.addEventListener("pointerenter",show);h.addEventListener("pointerdown",show);h.addEventListener("pointerleave",()=>tip.hidden=true)})});
+  $("#latest").innerHTML=LATEST.map(L=>`<div class="panel pcard"><h3>${L.t}</h3>${Object.entries(L.d).sort((a,b)=>b[1]-a[1]).map(([id,v])=>`<div class="prow"><span>${esc(byId(id).n)}</span><div class="bar"><i style="width:${Math.max(v,.5)*2}%"></i></div><b>${v}%</b></div>`).join("")}<div class="cnote">${L.n} <a href="${href(L.s)}" target="_blank" rel="noopener">Fonte</a></div></div>`).join("");
+}
+function renderDebates(){
+  $("#debates").innerHTML=DEBATES.map(d=>{const past=d.date<"2026-10-01";const dt=new Date(d.date+"T12:00:00");
+   return `<div class="panel deb${d.date==="2026-10-01"?" today":""}"><div class="when"><b>${String(dt.getDate()).padStart(2,"0")}/${String(dt.getMonth()+1).padStart(2,"0")}</b>${esc(d.when)}</div>
+   <div class="body"><div class="pill">${d.o}${d.date==="2026-10-01"?" · hoje":""}</div><h3>${esc(d.org)}</h3><div class="meta">${esc(d.who)}</div><p class="muted" style="margin:6px 0 0;font-size:14px">${esc(d.note)}</p>
+   <div class="links">${d.links.map(([l,k],i)=>`<a class="btn${i===0?" primary":""}" href="${href(k)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div></div></div>`}).join("");
+}
+function setOffice(o){office=o;
+ document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.office===o));
+ const cand=o==="gov"||o==="sen";["#sec-spec","#sec-list","#sec-detail"].forEach(s=>$(s).hidden=!cand);
+ $("#sec-polls").hidden=o!=="pol";$("#sec-deb").hidden=o!=="deb";
+ if(cand){sel=o==="gov"?"raquel":"marilia";dtab="perfil";renderGrid();renderDetail()}
+ if(o==="pol")renderPolls();if(o==="deb")renderDebates();
+ try{localStorage.setItem("pe26tab",o)}catch(e){}
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setOffice(t.dataset.office));
+["#q","#sp","#mand"].forEach(s=>$(s).addEventListener("input",renderGrid));
+let rT,lastW=innerWidth;addEventListener("resize",()=>{clearTimeout(rT);rT=setTimeout(()=>{if(Math.abs(innerWidth-lastW)<40)return;lastW=innerWidth;if(office==="pol")renderPolls();if(office==="gov"||office==="sen")renderGrid()},150)});
+let start="gov";const h=location.hash.slice(1);const HM={governador:"gov",senado:"sen",pesquisas:"pol",debates:"deb"};
+if(HM[h])start=HM[h];else{try{start=localStorage.getItem("pe26tab")||"gov"}catch(e){}}
+if(!["gov","sen","pol","deb"].includes(start))start="gov";
+setOffice(start);
+
+/* urna */
+(function(){let buf="";const D=$("#u-digits"),R=$("#u-res"),G=$("#u-cargo"),Hn=$("#u-hint");
+ const find=()=>C.find(c=>c.num===buf);
+ function draw(){const n=buf.length;
+  D.innerHTML=[0,1,2].map(i=>`<span class="${i===n&&n<3?"cur":""}">${buf[i]||""}</span>`).join("");
+  const c=find();
+  if(!buf){G.textContent="GOVERNADOR · SENADOR";R.innerHTML="Digite o número de um candidato.";Hn.textContent="Simulador. Aperte CONFIRMA para abrir a ficha.";return}
+  if(c){G.textContent=c.o==="gov"?"GOVERNADOR":"SENADOR";R.innerHTML=`<b>${esc(c.n)}</b>${esc(c.p)}${c.indef?" · candidatura indeferida":""}`;Hn.textContent=C.some(x=>x.num.length>buf.length&&x.num.startsWith(buf))?"CONFIRMA abre a ficha · mais um dígito para o Senado":"CONFIRMA abre a ficha · CORRIGE apaga";}
+  else if(buf.length<3&&C.some(x=>x.num.startsWith(buf))){R.textContent="Continue digitando…";}
+  else{R.innerHTML="<b>Número errado</b>Nenhum candidato com esse número.";Hn.textContent="Aperte CORRIGE para tentar de novo.";}}
+ document.querySelectorAll(".key").forEach(k=>k.onclick=()=>{if(buf.length>=3||(find()&&!C.some(x=>x.num.length>buf.length&&x.num.startsWith(buf))))return;buf+=k.dataset.k;draw()});
+ $("#u-corrige").onclick=()=>{buf="";draw()};
+ $("#u-branco").onclick=()=>{buf="";draw();R.innerHTML="<b>Voto em branco</b>Não vai para nenhum candidato.";};
+ $("#u-confirma").onclick=()=>{const c=find();if(!c){R.innerHTML=buf?"<b>Número errado</b>Aperte CORRIGE.":"Digite um número primeiro.";return}
+  setOffice(c.o);select(c.id,true);R.innerHTML=`<b>FIM</b>Abrindo a ficha de ${esc(c.n)}.`;buf="";setTimeout(draw,2200)};
+ draw();
+ const d=Math.ceil((new Date("2026-10-04T08:00:00-03:00")-Date.now())/864e5);$("#days").textContent=d>0?d:"0";
+ if(d<=0)$("#days").nextElementSibling.textContent="Dia de eleição";else if(d===1)$("#days").nextElementSibling.textContent="dia para o 1º turno, 4/10";
+})();
+</script>
+
+</body>
+</html>
