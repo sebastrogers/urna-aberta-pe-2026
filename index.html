@@ -314,6 +314,7 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
 .shg [hidden]{display:none}
 .warnbig{background:var(--sun-soft);border:2px solid #e0a800;border-radius:12px;padding:16px 18px;font-size:15px;color:var(--ink);max-width:80ch}.warnbig ul{margin:8px 0 0;padding-left:20px;display:grid;gap:6px}
 .srcs{display:grid;gap:0;padding:6px 18px}.srow{display:grid;gap:3px;padding:12px 0;border-bottom:1px solid var(--line)}.srow:last-child{border:0}.srow span{color:var(--ink-2);font-size:14px}
+.srclink{margin:10px 0 0;font-size:14px}.lnk{background:none;border:0;padding:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -371,8 +372,8 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
   <button class="tab" role="tab" data-office="cmp" aria-selected="false">Comparar</button>
   <button class="tab" role="tab" data-office="pol" aria-selected="false">Pesquisas</button>
   <button class="tab" role="tab" data-office="deb" aria-selected="false">Debates</button>
-  <button class="tab" role="tab" data-office="src" aria-selected="false">Fontes</button>
 </nav>
+<p class="srclink"><button type="button" class="lnk" data-go="src">ⓘ Veja de onde essas informações foram coletadas</button></p>
 
 <main>
   <section class="block" id="sec-spec">
@@ -451,7 +452,7 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
   </section>
 
   <section class="block" id="sec-src" hidden>
-    <div><h2>De onde vêm as informações</h2><p class="sub">Tudo vem de fontes públicas. Nada aqui é opinião de partido ou campanha.</p></div>
+    <div><button type="button" class="lnk" id="srcback">← Voltar</button><h2>De onde essas informações foram coletadas</h2><p class="sub">Tudo vem de fontes públicas. Nada aqui é opinião de partido ou campanha.</p></div>
     <div class="panel srcs">
       <div class="srow"><b>Candidaturas, bens, doações e gastos de campanha</b><span>TSE, DivulgaCandContas (divulgacandcontas.tse.jus.br). Dados declarados pelas próprias candidaturas; prestação de contas parcial até o fim da campanha.</span></div>
       <div class="srow"><b>Emendas parlamentares federais (por autor)</b><span>Portal da Transparência do Governo Federal (portaldatransparencia.gov.br).</span></div>
@@ -487,7 +488,7 @@ footer{padding-top:28px;color:var(--ink-3);font-size:12.5px;max-width:72ch}
   </section>
 </main>
 
-<footer>Compilado em 1º/10/2026. Registros do TSE podem mudar até a eleição. As candidaturas de Professor Jeremias e Pastor Gilvan Costa foram indeferidas pelo TRE-PE. Fotos oficiais do TSE (via CNN Brasil) e da Agência Senado; quando a foto não carrega, aparecem as iniciais. A cor do anel indica o espectro.</footer>
+<footer><p><button type="button" class="lnk" data-go="src">Veja de onde essas informações foram coletadas</button></p>Compilado em 1º/10/2026. Registros do TSE podem mudar até a eleição. As candidaturas de Professor Jeremias e Pastor Gilvan Costa foram indeferidas pelo TRE-PE. Fotos oficiais do TSE (via CNN Brasil) e da Agência Senado; quando a foto não carrega, aparecem as iniciais. A cor do anel indica o espectro.</footer>
 </div>
 
 <script>
@@ -1420,6 +1421,9 @@ setOffice(start);
  $("#sh-cp").onclick=()=>{const u=url();const ok=()=>$("#sh-msg").textContent="Link copiado: "+u;
   if(navigator.clipboard)navigator.clipboard.writeText(u).then(ok,()=>$("#sh-msg").textContent=u);else $("#sh-msg").textContent=u};
 })();
+
+(function(){let prev="gov";const go=()=>{if(office!=="src")prev=office;setOffice("src");scrollTo({top:0,behavior:"smooth"})};
+document.querySelectorAll("[data-go=src]").forEach(b=>b.onclick=go);$("#srcback").onclick=()=>{setOffice(prev);scrollTo({top:0})}})();
 </script>
 
 </body>
