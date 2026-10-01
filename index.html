@@ -331,6 +331,15 @@ footer .lnk,.srcbox .lnk{display:inline-block;padding:12px 4px;min-height:44px;b
 .srcx{position:sticky;top:0;float:right;min-width:44px;min-height:44px;border:0;background:var(--surface);color:var(--ink);border-radius:50%;font-size:18px;cursor:pointer}
 @media(max-width:560px){.srcm{padding:0}.srcbox{width:100%;border-radius:16px 16px 0 0;max-height:88dvh}}
 .rl{display:block;color:var(--ink-2);font-size:12.5px;line-height:1.3;margin-top:2px}
+.pchips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.pch{font:600 12px var(--sans);padding:5px 9px;border-radius:999px;background:hsl(var(--h) 60% 50% / .14);color:var(--ink)}.pch.off{background:var(--sunk);color:var(--ink-2);font-weight:500}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.pcard{background:var(--sunk);border-radius:12px;padding:12px 14px;border-left:5px solid hsl(var(--h) 60% 48%)}.pcard h4{margin:0 0 4px;font:700 15px var(--sans);color:var(--ink)}.pcard p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.nm{background:hsl(45 100% 60% / .35);color:var(--ink);font-weight:700;border-radius:4px;padding:0 3px}
+.hx{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line-2);display:grid;gap:12px}
+.hx li{position:relative;background:var(--sunk);border-radius:12px;padding:10px 14px}.hx li::before{content:"";position:absolute;left:-26px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.hx-p::before{background:#3b82c4!important}.hx-c::before{background:#e0a800!important}.hx-n::before,.hx-r::before{background:var(--ink-2)!important}
+.hxt{display:block;font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}.hx p{margin:3px 0 0;font-family:var(--body,inherit);text-transform:none;letter-spacing:0;font-weight:400;font-size:14.5px;line-height:1.5;color:var(--ink)}
+body{padding-bottom:72px}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -932,6 +941,17 @@ function renderGrid(){
    </button>`}).join(""):'<p class="none">Nenhum candidato com esses filtros.</p>';
   document.querySelectorAll(".card").forEach(b=>b.onclick=()=>select(b.dataset.id,true));
 }
+
+const HUE=[350,215,20,160,95,285,45,180];
+const hl=t=>esc(t).replace(/(R\$\s?[\d.,]+(?:\s(?:mil|milhões|milhão|bilhões|bilhão)\b)?|\d[\d.,]*\s?%|\b\d[\d.]*(?:\s(?:mil|milhões|bilhões))?\s(?:novos?|vagas|creches|agentes|batalhões|ônibus|policiais|mandatos?|escolas|leitos|km)\b)/g,'<mark class="nm">$1</mark>');
+function propHtml(c){
+  const it=c.prop.map(([a,t])=>{let i=RX.findIndex(r=>r.test(a+" "+t));return{a,t,i}});
+  const cov=ARE8.map((n,i)=>({n,i,k:it.filter(x=>x.i===i).length}));
+  return `<div class="pchips" aria-label="Áreas citadas">${cov.map(x=>`<span class="pch${x.k?"":" off"}" style="--h:${HUE[x.i]}">${x.k?"✓":"✕"} ${esc(x.n)}</span>`).join("")}</div>
+  <div class="pgrid">${it.map(x=>`<article class="pcard" style="--h:${x.i>=0?HUE[x.i]:220}"><h4>${esc(x.a)}</h4><p>${hl(x.t)}</p></article>`).join("")}</div>`}
+const HTAG=[[/nunca exerceu|sem mandato/i,"Sem mandato anterior","n"],[/quaest|datafolha|ipec|aprova|pesquisa/i,"Pesquisa","p"],[/crítica|cobrou|oposição|observou|apontou/i,"Crítica","c"],[/prefeit|vereador|deputad|senador|ministr|secretári|governador|suplên|presidiu|reeleit|eleit/i,"Cargo e mandato","m"]];
+function histHtml(c){
+  return `<ol class="hx">${c.hist.map(h=>{const t=HTAG.find(x=>x[0].test(h))||[0,"Registro","r"];return `<li class="hx-${t[2]}"><span class="hxt">${t[1]}</span><p>${hl(h)}</p></li>`}).join("")}</ol>`}
 function renderDetail(){
   const c=byId(sel);const D=$("#detail");
   if(!c){D.innerHTML='<p class="none">Escolha um candidato para ver a ficha.</p>';return}
@@ -939,8 +959,8 @@ function renderDetail(){
   let body="";
   if(dtab==="perfil")body=`<dl class="facts"><div><dt class="label">${c.o==="gov"?"Vice":"Suplentes"}</dt><dd>${esc(c.vice.replace("Suplentes: ",""))}</dd></div><div><dt class="label">Profissão</dt><dd>${esc(c.prof)}</dd></div><div><dt class="label">Coligação</dt><dd>${esc(c.col)}</dd></div><div><dt class="label">Espectro estimado</dt><dd>${esc(c.spl)}</dd></div></dl><ul>${c.perfil.map(p=>"<li>"+esc(p)+"</li>").join("")}</ul>`;
   if(dtab==="obs")body=vizGS(c);
-  if(dtab==="prop")body="<ul>"+c.prop.map(([a,t])=>`<li><b>${esc(a)}.</b> ${esc(t)}</li>`).join("")+"</ul>";
-  if(dtab==="hist")body="<ul>"+c.hist.map(h=>"<li>"+esc(h)+"</li>").join("")+"</ul>";
+  if(dtab==="prop")body=propHtml(c);
+  if(dtab==="hist")body=histHtml(c);
   if(dtab==="cases")body=c.cases.length?c.cases.map(k=>`<div class="case${k.closed?" closed":""}"><span class="status${k.closed?" closed":""}">${esc(k.st)}</span><h4>${esc(k.t)}</h4><p>${esc(k.d)}</p><div class="src">${k.s.map(s=>`<a href="${S[s][1]}" target="_blank" rel="noopener">${esc(S[s][0])}</a>`).join(" · ")}</div></div>`).join(""):'<p class="none">Nenhuma investigação, processo ou escândalo relevante encontrado nas fontes consultadas.</p>';
   if(dtab==="src")body='<ul class="src">'+c.src.map(s=>`<li><a href="${S[s][1]}" target="_blank" rel="noopener">${esc(S[s][0])}</a></li>`).join("")+`<li><a href="${S.tse[1]}" target="_blank" rel="noopener">Plano de governo e bens: DivulgaCandContas (TSE)</a></li></ul>`;
   D.innerHTML=`<div class="dhead">${av(c)}<div><div class="label">${c.o==="gov"?"Governador":"Senado"} · nº ${c.num}${c.indef?" · indeferida no TRE-PE":""}</div><h2>${esc(c.n)}</h2><div class="meta">${esc(c.p)} · ${c.age} anos</div></div>${kc(c.num,"lg")}</div>
