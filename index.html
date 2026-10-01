@@ -876,7 +876,7 @@ function renderDebates(){
    <div class="links">${d.links.map(([l,k],i)=>`<a class="btn${i===0?" primary":""}" href="${href(k)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div></div></div>`}).join("");
 }
 /* ===== render deputados federais ===== */
-let dfSel="veras",dfTab="emendas",dfTier="";
+let dfSel=null,dfTab="emendas",dfTier="";
 const brl=v=>v==null?"—":"R$ "+(v>=1000?(v/1000).toFixed(2).replace(".",",")+" bi":v.toFixed(1).replace(".",",")+" mi");
 const portalLink=c=>`https://portaldatransparencia.gov.br/emendas/consulta?de=${c.em[0].slice(0,4)}&ate=2026&autorEmenda=${c.em[7]}&ordenarPor=valorPago&direcao=desc`;
 function renderDfRank(){
@@ -898,7 +898,7 @@ function renderDfGrid(){
   $("#df-grid").querySelectorAll(".card").forEach(b=>b.onclick=()=>dfSelect(b.dataset.id,true));
 }
 function renderDfDetail(){
-  const d=DF.find(x=>x.id===dfSel),D=$("#df-detail");if(!d)return;
+  const d=DF.find(x=>x.id===dfSel),D=$("#df-detail");if(!d){D.innerHTML='<p class="none">Escolha um deputado na lista ou no ranking para ver a ficha.</p>';return}
   const T=[["perfil","Perfil"],["emendas","Emendas e dinheiro"],["atuacao","Atuação"],["cases","Escândalos e processos"+(d.cases.length?" ("+d.cases.length+")":"")],["src","Fontes"]];
   let body="";
   if(dfTab==="perfil")body=`<dl class="facts"><div><dt class="label">Situação</dt><dd>${TIER[d.tier]}</dd></div><div><dt class="label">Profissão declarada</dt><dd>${esc(d.prof)}</dd></div><div><dt class="label">Bens declarados</dt><dd>${d.bens?brl(d.bens):"Nenhum bem declarado"}</dd></div><div><dt class="label">Espectro estimado</dt><dd>${esc(d.spl)}</dd></div></dl><p><b>Cargos:</b> ${esc(d.cargos)}</p>`;
@@ -928,7 +928,7 @@ document.querySelectorAll(".tierf button").forEach(b=>b.onclick=()=>{dfTier=b.da
 $("#dfq").addEventListener("input",renderDfGrid);
 
 /* ===== render deputados estaduais ===== */
-let deSel="alvaro-porto",deTab="perfil",deF="";
+let deSel=null,deTab="perfil",deF="";
 const mi=v=>v==null?"—":"R$ "+v.toFixed(2).replace(".",",")+" mi";
 function renderDeRank(){
   const at=DE.filter(d=>d.em).sort((a,b)=>b.em[2]-a.em[2]).slice(0,15);const mx=at[0].em[2];
@@ -949,7 +949,7 @@ function renderDeGrid(){
   $("#de-grid").querySelectorAll(".card").forEach(b=>b.onclick=()=>deSelect(b.dataset.id,true));
 }
 function renderDeDetail(){
-  const d=DE.find(x=>x.id===deSel),D=$("#de-detail");if(!d)return;
+  const d=DE.find(x=>x.id===deSel),D=$("#de-detail");if(!d){D.innerHTML='<p class="none">Escolha um deputado na lista ou no ranking para ver a ficha.</p>';return}
   const T=[["perfil","Perfil"],["emendas","Emendas e dinheiro"],["cases","Escândalos e processos"+(d.cases.length?" ("+d.cases.length+")":"")],["src","Fontes"]];
   let body="";
   const sit=d.cand?"Candidato(a) à reeleição para deputado estadual":(d.outra?"Disputa outro cargo: "+d.outra:"Não aparece como candidato(a) a deputado estadual no TSE (consulta em 1º/10/2026)");
@@ -982,7 +982,7 @@ function setOffice(o){office=o;
  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.office===o));
  const cand=o==="gov"||o==="sen";["#sec-spec","#sec-list","#sec-detail"].forEach(s=>$(s).hidden=!cand);
  $("#sec-polls").hidden=o!=="pol";$("#sec-deb").hidden=o!=="deb";$("#sec-df").hidden=o!=="df";if(o==="df")renderDf();$("#sec-de").hidden=o!=="de";if(o==="de")renderDe();
- if(cand){sel=o==="gov"?"raquel":"marilia";dtab="perfil";renderGrid();renderDetail()}
+ if(cand){sel=null;dtab="perfil";renderGrid();renderDetail()}
  if(o==="pol")renderPolls();if(o==="deb")renderDebates();
  try{localStorage.setItem("pe26tab",o)}catch(e){}
 }
