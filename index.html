@@ -333,8 +333,8 @@ footer .lnk,.srcbox .lnk{display:inline-block;padding:12px 4px;min-height:44px;b
 .rl{display:block;color:var(--ink-2);font-size:12.5px;line-height:1.3;margin-top:2px}
 .pchips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.pch{font:600 12px var(--sans);padding:5px 9px;border-radius:999px;background:hsl(var(--h) 60% 50% / .14);color:var(--ink)}.pch.off{background:var(--sunk);color:var(--ink-2);font-weight:500}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.pcard{background:var(--sunk);border-radius:12px;padding:12px 14px;border-left:5px solid hsl(var(--h) 60% 48%)}.pcard h4{margin:0 0 4px;font:700 15px var(--sans);color:var(--ink)}.pcard p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-2)}
-.nm{background:hsl(45 100% 60% / .35);color:var(--ink);font-weight:700;border-radius:4px;padding:0 3px}
+.prc{background:var(--sunk);border-radius:12px;padding:12px 14px;border-left:5px solid hsl(var(--h) 60% 48%)}.prc h4{margin:0 0 4px;font:700 15px var(--sans);color:var(--ink)}.prc p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.hnum{background:hsl(45 100% 60% / .35);color:var(--ink);font-weight:700;border-radius:4px;padding:0 3px}
 .hx{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line-2);display:grid;gap:12px}
 .hx li{position:relative;background:var(--sunk);border-radius:12px;padding:10px 14px}.hx li::before{content:"";position:absolute;left:-26px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
 .hx-p::before{background:#3b82c4!important}.hx-c::before{background:#e0a800!important}.hx-n::before,.hx-r::before{background:var(--ink-2)!important}
@@ -355,6 +355,16 @@ body{padding-bottom:72px}
 .achk li.n,.achk li.n em{text-decoration:none!important}
 .chead{flex-wrap:wrap;gap:8px}.chead .seg{max-width:100%;flex-wrap:wrap}
 .tierf{flex-wrap:wrap;border-radius:18px;max-width:100%}.tierf button{white-space:nowrap}
+/* espectro com mais contraste */
+.axis{height:10px;border-radius:5px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.dot{border:1.5px solid var(--ink-3)}
+.dot .av{border-width:3px}
+.vtrack{height:8px;border-radius:4px;opacity:1;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.vtrack i{width:18px;height:18px;border:4px solid var(--ink);background:var(--surface);box-shadow:0 0 0 2px var(--surface),0 1px 4px rgba(0,0,0,.35)}
+.vrow .av{border-width:3px}
+.av{border-width:3px}
+:root[data-theme="dark"] .axis,:root[data-theme="dark"] .vtrack{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .axis,:root:not([data-theme="light"]) .vtrack{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -375,7 +385,7 @@ body{padding-bottom:72px}
   <div class="hero-txt">
     <div class="kicker"><span class="flag" aria-hidden="true"><b style="background:var(--blue)"></b><b style="background:var(--surface)"></b><b style="background:var(--sun)"></b></span>Eleições 2026 · Pernambuco</div>
     <h1>Quem quer governar <em>Pernambuco</em></h1>
-    <p>Propostas, o que cada candidato já fez em mandato, escândalos e processos, espectro político, pesquisas e debates. Fontes oficiais e imprensa, atualizado em 1º de outubro.</p>
+    <p>Propostas, o que cada candidato já fez em mandato, escândalos e processos, espectro político, pesquisas e debates. Fontes oficiais e imprensa, atualizado em 2 de outubro.</p>
     <div class="count">
       <div class="big"><b id="days">3</b><span>dias para o 1º turno, 4/10</span></div>
       <div><b>8</b><span>a governador</span></div>
@@ -502,11 +512,11 @@ body{padding-bottom:72px}
       <div class="srow"><b>Espectro político</b><span>Estimativa editorial a partir do partido e do histórico. Não é autodeclaração.</span></div>
     </div>
     <div class="warnbig" role="note"><b>O que esta página NÃO tem</b><ul><li>Lista completa de deputados: mostra só parte das candidaturas (veja o aviso em cada aba).</li><li>Emendas federais por município ou instituição.</li><li>Gastos de cota parlamentar (CEAP) e votações nominais.</li><li>Resultado da apuração: só depois do dia 4/10, com dados oficiais do TSE.</li></ul></div>
-    <p class="cnote">Achou erro ou dado desatualizado? <a href="https://github.com/sebastrogers/urna-aberta-pe-2026/issues" target="_blank" rel="noopener">Avise aqui</a>. Última atualização: 1º de outubro de 2026.</p>
+    <p class="cnote">Achou erro ou dado desatualizado? <a href="https://github.com/sebastrogers/urna-aberta-pe-2026/issues" target="_blank" rel="noopener">Avise aqui</a>. Última atualização: 2 de outubro de 2026 (pesquisas e debates).</p>
   </section>
 
   <section class="block" id="sec-polls" hidden>
-    <div><h2>Tendência das pesquisas</h2><p class="sub">Intenção de voto estimulada no 1º turno, por data de campo. Pesquisas registradas no TSE, margem de erro de 3 pontos. São retratos do momento, não previsões. Passe o dedo ou o mouse sobre os pontos.</p></div>
+    <div><h2>Tendência das pesquisas</h2><p class="sub">Intenção de voto estimulada no 1º turno, por data de campo. Pesquisas registradas no TSE, margem de erro de 2 a 3 pontos. São retratos do momento, não previsões. Passe o dedo ou o mouse sobre os pontos.</p></div>
     <div class="charts" id="charts"></div>
     <h2 style="margin-top:12px">Últimas rodadas</h2>
     <div class="latest" id="latest"></div>
@@ -527,7 +537,7 @@ body{padding-bottom:72px}
   </section>
 </main>
 
-<footer><p><button type="button" class="lnk" data-go="src">Veja de onde essas informações foram coletadas</button></p>Compilado em 1º/10/2026. Registros do TSE podem mudar até a eleição. As candidaturas de Professor Jeremias e Pastor Gilvan Costa foram indeferidas pelo TRE-PE. Fotos oficiais do TSE (via CNN Brasil) e da Agência Senado; quando a foto não carrega, aparecem as iniciais. A cor do anel indica o espectro.</footer>
+<footer><p><button type="button" class="lnk" data-go="src">Veja de onde essas informações foram coletadas</button></p>Compilado em 1º/10/2026; pesquisas e debates atualizados em 2/10/2026. Registros do TSE podem mudar até a eleição. As candidaturas de Professor Jeremias e Pastor Gilvan Costa foram indeferidas pelo TRE-PE. Fotos oficiais do TSE (via CNN Brasil) e da Agência Senado; quando a foto não carrega, aparecem as iniciais. A cor do anel indica o espectro.</footer>
 </div>
 
 <script>
@@ -719,6 +729,9 @@ Object.assign(S,{
  df_mai:["Gazeta do Povo: Datafolha mai/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-maio-2026/"],
  df_jul:["Gazeta do Povo: Datafolha jul/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-julho-2026/"],
  df_ago:["Gazeta do Povo: Datafolha ago/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-agosto-2026/"],
+ df_out:["O Povo: Datafolha 28/9–1/10 (governador)","https://www.opovo.com.br/noticias/politica/2026/10/01/datafolha-pe-em-empate-tecnico-raquel-lyra-tem-46-dos-votos-totais-e-joao-campos-soma-44.html"],
+ df_out_sen:["Metrópoles: Datafolha 28/9–1/10 (Senado)","https://www.metropoles.com/brasil/datafolha-marilia-e-humberto-lideram-disputa-pelo-senado-em-pe-com-19"],
+ pp_set:["Gazeta do Povo: Paraná Pesquisas 27–29/9","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/parana-pesquisas-governador-pernambuco-setembro-2026/"],
  df_set2:["Gazeta do Povo: Datafolha 22–24/9","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/datafolha-governador-senador-pernambuco-setembro-2026-2/"],
  q_abr:["Gazeta do Povo: Quaest abr/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/genial-quaest-governador-senador-pernambuco-abril-2026/"],
  q_jul:["Gazeta do Povo: Genial/Quaest jul/2026","https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/genial-quaest-governador-senador-pernambuco-julho-2026/"],
@@ -885,7 +898,7 @@ const TIER={atual:"Deputado atual",ex:"Ex-deputado federal",comp:"Nome competiti
 /* Séries: [data de campo (meio), Raquel, João] */
 const TREND={
  gov:[
-  {name:"Datafolha",pts:[["2026-02-04",35,47,"df_fev"],["2026-04-14",38,50,"df_abr"],["2026-05-26",48,43,"df_mai"],["2026-07-29",48,42,"df_jul"],["2026-08-19",47,40,"df_ago"],["2026-09-09",47,42,"dfolha"],["2026-09-23",48,44,"df_set2"]]},
+  {name:"Datafolha",pts:[["2026-02-04",35,47,"df_fev"],["2026-04-14",38,50,"df_abr"],["2026-05-26",48,43,"df_mai"],["2026-07-29",48,42,"df_jul"],["2026-08-19",47,40,"df_ago"],["2026-09-09",47,42,"dfolha"],["2026-09-23",48,44,"df_set2"],["2026-09-30",46,44,"df_out"]]},
   {name:"Quaest",pts:[["2026-04-24",34,42,"q_abr"],["2026-07-24",43,37,"q_jul"],["2026-09-05",43,37,"q_set1"],["2026-09-21",41,39,"q_set2"],["2026-09-27",42,42,"quaest"]]}
  ],
  sen:{keys:["marilia","humberto","mendonca","eduardo","tulio"],
@@ -893,13 +906,14 @@ const TREND={
 };
 const POLLS={gov:{q:{raquel:42,joao:42,ivan:1,renan:0,camila:0,guilherme:0,victor:0}},sen:{q:{marilia:19,humberto:17,mendonca:10,eduardo:7,tulio:3,gilvan:1,carlos:1,paulo:0,samuel:0,gorett:0,mailson:0,mariano:0}}};
 const LATEST=[
- {t:"Governador · Quaest, 25 a 28/9",d:{raquel:42,joao:42,ivan:1},n:"Brancos/nulos 5%, indecisos 10%. 2º turno: Raquel 44% × João 44%. 1.302 entrevistas, reg. PE-00324/2026.",s:"quaest"},
- {t:"Governador · Datafolha, 22 a 24/9",d:{raquel:48,joao:44},n:"Demais candidatos somam 2%; brancos, nulos e indecisos 6%. 2º turno: Raquel 51% × João 45%. 1.204 entrevistas.",s:"df_set2"},
- {t:"Senado · Quaest, 25 a 28/9",d:{marilia:19,humberto:17,mendonca:10,eduardo:7,tulio:3,gilvan:1,carlos:1},n:"Soma do 1º e 2º voto, reduzida a 100%. Brancos/nulos 19%, indecisos 23%.",s:"quaest"},
- {t:"Senado · Datafolha, 22 a 24/9",d:{marilia:19,humberto:17,mendonca:13,eduardo:10,tulio:6},n:"Outros somam 7%; brancos, nulos e indecisos 29%. Método de contagem diferente da Quaest.",s:"df_set2"}
+ {t:"Governador · Datafolha, 28/9 a 1/10",d:{raquel:46,joao:44,ivan:2,renan:1},n:"Votos totais. Brancos/nulos 4%, indecisos 3%. Votos válidos: Raquel 50% × João 47%. 2º turno: Raquel 50% × João 46%. 1.204 entrevistas, reg. PE-06822/2026.",s:"df_out"},
+ {t:"Governador · Paraná Pesquisas, 27 a 29/9",d:{joao:49.1,raquel:48.6,ivan:1.1,camila:0.4},n:"Votos válidos (sem brancos, nulos e indecisos), por isso não compare direto com votos totais. 2º turno: João 50,5% × Raquel 49,5%. 1.352 entrevistas, reg. PE-01835/2026.",s:"pp_set"},
+ {t:"Governador · Quaest, 25 a 28/9",d:{raquel:42,joao:42,ivan:1},n:"Votos totais. Brancos/nulos 5%, indecisos 10%. 2º turno: Raquel 44% × João 44%. 1.302 entrevistas, reg. PE-00324/2026.",s:"quaest"},
+ {t:"Senado · Datafolha, 28/9 a 1/10",d:{marilia:19,humberto:19,mendonca:12,eduardo:10,tulio:5,carlos:2},n:"Duas vagas: soma do 1º e 2º voto. Outros com 1% cada; brancos, nulos ou nenhum 16%, indecisos 13%. Método de contagem diferente da Quaest. Reg. PE-06822/2026.",s:"df_out_sen"},
+ {t:"Senado · Quaest, 25 a 28/9",d:{marilia:19,humberto:17,mendonca:10,eduardo:7,tulio:3,gilvan:1,carlos:1},n:"Soma do 1º e 2º voto, reduzida a 100%. Brancos/nulos 19%, indecisos 23%.",s:"quaest"}
 ];
 const DEBATES=[
- {date:"2026-10-01",o:"Governador",org:"TV Jornal (SBT) e Sistema Jornal do Commercio",when:"10h45 às 13h",who:"Candidatos ao governo",note:"Último debate antes do 1º turno. Transmissão na TV aberta e nas plataformas digitais do JC.",links:[["Onde assistir","onde"]]},
+ {date:"2026-10-01",o:"Governador",org:"TV Jornal (SBT) e Sistema Jornal do Commercio",when:"Manhã, a partir das 10h45",who:"Raquel Lyra, João Campos e Ivan Moraes",note:"Último debate antes do 1º turno. Quatro blocos com perguntas, respostas, réplicas e considerações finais. Transmitido na TV aberta e nas plataformas digitais do JC.",links:[["Onde assistir","onde"]]},
  {date:"2026-09-29",o:"Governador",org:"TV Globo Pernambuco",when:"Noite, após a novela",who:"Raquel Lyra, João Campos e Ivan Moraes",note:"Mediação de Márcio Bonfim, com checagem do Fato ou Fake. Íntegra no g1 e no Globoplay.",links:[["Íntegra no g1 Pernambuco","https://g1.globo.com/pe/pernambuco/eleicoes/2026/"],["Destaques (Brasil de Fato)","debateGov"]]},
  {date:"2026-09-22",o:"Senado",org:"Rádio Grande Rio FM, Petrolina",when:"Manhã",who:"Humberto Costa, Marília Arraes, Mendonça Filho, Eduardo da Fonte e Túlio Gadêlha",note:"Embates sobre bets, alianças, maioridade penal e obras do Sertão.",links:[["Resumo (Nill Júnior)","mfPet"],["Resumo (Blog Dellas)","debSen2"]]},
  {date:"2026-09-21",o:"Governador",org:"TV Guararapes (Record)",when:"18h às 19h55",who:"Raquel Lyra, João Campos e Ivan Moraes",note:"Transmitido no canal 9 e no YouTube da emissora.",links:[["Assistir no YouTube","https://www.youtube.com/watch?v=YP8I83TnxcA"],["Melhores momentos (Nill Júnior)","https://nilljunior.com.br/assista-ao-debate-com-candidatos-ao-governo-de-pernambuco/"]]},
@@ -917,6 +931,7 @@ const PHOTO={raquel:"https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/
 const av=(c,cls="")=>{const p=PHOTO[c.id]||c.photo;return `<span class="av sp-${c.sp} ${cls}" aria-hidden="true"><b>${ini(c.n)}</b>${p?`<img src="${p}" alt="" referrerpolicy="no-referrer" onload="this.parentNode.classList.add('ph')" onerror="this.remove()">`:""}</span>`};
 const byId=id=>C.find(x=>x.id===id);
 const kc=(n,c="")=>`<span class="kc ${c}" aria-label="número ${n}">${[...n].map(d=>"<i>"+d+"</i>").join("")}</span>`;
+const TODAY=(()=>{try{return new Date().toLocaleDateString("sv-SE",{timeZone:"America/Recife"})}catch(e){return new Date().toISOString().slice(0,10)}})();
 const fmtD=s=>{const d=new Date(s+"T12:00:00");return d.getDate()+"/"+(d.getMonth()+1)};
 
 /* tema */
@@ -958,12 +973,12 @@ function renderGrid(){
 }
 
 const HUE=[350,215,20,160,95,285,45,180];
-const hl=t=>esc(t).replace(/(R\$\s?[\d.,]+(?:\s(?:mil|milhões|milhão|bilhões|bilhão)\b)?|\d[\d.,]*\s?%|\b\d[\d.]*(?:\s(?:mil|milhões|bilhões))?\s(?:novos?|vagas|creches|agentes|batalhões|ônibus|policiais|mandatos?|escolas|leitos|km)\b)/g,'<mark class="nm">$1</mark>');
+const hl=t=>esc(t).replace(/(R\$\s?[\d.,]+(?:\s(?:mil|milhões|milhão|bilhões|bilhão)\b)?|\d[\d.,]*\s?%|\b\d[\d.]*(?:\s(?:mil|milhões|bilhões))?\s(?:novos?|vagas|creches|agentes|batalhões|ônibus|policiais|mandatos?|escolas|leitos|km)\b)/g,'<mark class="hnum">$1</mark>');
 function propHtml(c){
   const it=c.prop.map(([a,t])=>{let i=RX.findIndex(r=>r.test(a+" "+t));return{a,t,i}});
   const cov=ARE8.map((n,i)=>({n,i,k:it.filter(x=>x.i===i).length}));
   return `<div class="pchips" aria-label="Áreas citadas">${cov.map(x=>`<span class="pch${x.k?"":" off"}" style="--h:${HUE[x.i]}">${x.k?"✓":"✕"} ${esc(x.n)}</span>`).join("")}</div>
-  <div class="pgrid">${it.map(x=>`<article class="pcard" style="--h:${x.i>=0?HUE[x.i]:220}"><h4>${esc(x.a)}</h4><p>${hl(x.t)}</p></article>`).join("")}</div>`}
+  <div class="pgrid">${it.map(x=>`<article class="prc" style="--h:${x.i>=0?HUE[x.i]:220}"><h4>${esc(x.a)}</h4><p>${hl(x.t)}</p></article>`).join("")}</div>`}
 const HTAG=[[/nunca exerceu|sem mandato/i,"Sem mandato anterior","n"],[/quaest|datafolha|ipec|aprova|pesquisa/i,"Pesquisa","p"],[/crítica|cobrou|oposição|observou|apontou/i,"Crítica","c"],[/prefeit|vereador|deputad|senador|ministr|secretári|governador|suplên|presidiu|reeleit|eleit/i,"Cargo e mandato","m"]];
 function histHtml(c){
   return `<ol class="hx">${c.hist.map(h=>{const t=HTAG.find(x=>x[0].test(h))||[0,"Registro","r"];return `<li class="hx-${t[2]}"><span class="hxt">${t[1]}</span><p>${hl(h)}</p></li>`}).join("")}</ol>`}
@@ -1026,12 +1041,12 @@ function renderPolls(){
     w.querySelectorAll(".hit").forEach(h=>{const show=()=>{const r=svg.getBoundingClientRect(),wr=w.getBoundingClientRect(),vb=svg.viewBox.baseVal;
       tip.textContent=h.dataset.tip;tip.hidden=false;tip.style.left=(r.left-wr.left+w.scrollLeft+(+h.getAttribute("cx"))*r.width/vb.width)+"px";tip.style.top=(r.top-wr.top+(+h.getAttribute("cy"))*r.height/vb.height-6)+"px"};
       h.addEventListener("pointerenter",show);h.addEventListener("pointerdown",show);h.addEventListener("pointerleave",()=>tip.hidden=true)})});
-  $("#latest").innerHTML=LATEST.map(L=>`<div class="panel pcard"><h3>${L.t}</h3>${Object.entries(L.d).sort((a,b)=>b[1]-a[1]).map(([id,v])=>`<div class="prow"><span>${esc(byId(id).n)}</span><div class="bar"><i style="width:${Math.max(v,.5)*2}%"></i></div><b>${v}%</b></div>`).join("")}<div class="cnote">${L.n} <a href="${href(L.s)}" target="_blank" rel="noopener">Fonte</a></div></div>`).join("");
+  $("#latest").innerHTML=LATEST.map(L=>`<div class="panel pcard"><h3>${L.t}</h3>${Object.entries(L.d).sort((a,b)=>b[1]-a[1]).map(([id,v])=>`<div class="prow"><span>${esc(byId(id).n)}</span><div class="bar"><i style="width:${Math.max(v,.5)*2}%"></i></div><b>${String(v).replace(".",",")}%</b></div>`).join("")}<div class="cnote">${L.n} <a href="${href(L.s)}" target="_blank" rel="noopener">Fonte</a></div></div>`).join("");
 }
 function renderDebates(){
-  $("#debates").innerHTML=DEBATES.map(d=>{const past=d.date<"2026-10-01";const dt=new Date(d.date+"T12:00:00");
-   return `<div class="panel deb${d.date==="2026-10-01"?" today":""}"><div class="when"><b>${String(dt.getDate()).padStart(2,"0")}/${String(dt.getMonth()+1).padStart(2,"0")}</b>${esc(d.when)}</div>
-   <div class="body"><div class="pill">${d.o}${d.date==="2026-10-01"?" · hoje":""}</div><h3>${esc(d.org)}</h3><div class="meta">${esc(d.who)}</div><p class="muted" style="margin:6px 0 0;font-size:14px">${esc(d.note)}</p>
+  $("#debates").innerHTML=DEBATES.map(d=>{const past=d.date<TODAY;const dt=new Date(d.date+"T12:00:00");
+   return `<div class="panel deb${d.date===TODAY?" today":""}"><div class="when"><b>${String(dt.getDate()).padStart(2,"0")}/${String(dt.getMonth()+1).padStart(2,"0")}</b>${esc(d.when)}</div>
+   <div class="body"><div class="pill">${d.o}${d.date===TODAY?" · hoje":""}</div><h3>${esc(d.org)}</h3><div class="meta">${esc(d.who)}</div><p class="muted" style="margin:6px 0 0;font-size:14px">${esc(d.note)}</p>
    <div class="links">${d.links.map(([l,k],i)=>`<a class="btn${i===0?" primary":""}" href="${href(k)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div></div></div>`}).join("");
 }
 /* ===== render deputados federais ===== */
