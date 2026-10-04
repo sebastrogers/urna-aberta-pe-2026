@@ -401,6 +401,16 @@ body{padding-bottom:72px}
 .ap-sum.ap-ok{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}.ap-sum.ap-mid{border-color:#e0a800}
 .ap-sit{font-size:12.5px;line-height:1.3;font-weight:600;border-radius:8px;padding:4px 8px;justify-self:start}.ap-sit.ap-ok{background:var(--accent);color:#fff}.ap-sit.ap-mid{background:color-mix(in srgb,#e0a800 22%,var(--surface));color:var(--ink)}.ap-sit.ap-no{background:var(--sunk);color:var(--ink-2);font-weight:500}
 .ap-qe{color:var(--ink)}
+.ap-view{margin-top:2px}
+.mp-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mp-bar select{min-width:0;max-width:100%;font:500 14px var(--body,inherit);padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.mp-lvl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.mp-lvl b{font:700 16px var(--sans);color:var(--ink);margin-right:auto}.mp-lvl input{min-width:0;flex:1 1 180px;max-width:280px;font:500 14px var(--body,inherit);padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.mp-wrap{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;overflow:hidden}.mp-wrap svg{width:100%;height:auto;display:block;max-height:72vh}
+.mp-a{stroke:var(--surface);stroke-width:.8;cursor:pointer;vector-effect:non-scaling-stroke;transition:fill .3s}.mp-a:hover{stroke:var(--ink);stroke-width:1.5}.mp-a.on{stroke:var(--ink);stroke-width:2.5}
+.mp-info{background:var(--surface);border:2px solid var(--ink);border-radius:14px;padding:12px 14px;margin-top:10px;display:grid;gap:6px}.mp-ih{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}.mp-ih b{font:800 17px var(--sans);color:var(--ink)}.mp-ih span{font-size:13px;color:var(--ink-2)}
+.mp-ir{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:14px}.mp-ir i{width:12px;height:12px;border-radius:3px}.mp-ir small{color:var(--ink-2)}.mp-ir b{font:800 15px var(--sans)}
+.mp-leg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13.5px;align-items:center}.mp-leg span{display:inline-flex;gap:6px;align-items:center}.mp-leg i{width:12px;height:12px;border-radius:3px;display:inline-block}.mp-leg small{color:var(--ink-2)}.mp-note{flex-basis:100%}
+.mp-grad{height:12px;border-radius:6px;flex-basis:100%}.mp-gl{display:flex;justify-content:space-between;flex-basis:100%}
+.mp-prog{font-weight:600}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -1495,7 +1505,7 @@ let rT,lastW=innerWidth;addEventListener("resize",()=>{clearTimeout(rT);rT=setTi
 /* ===== Apuração ao vivo (TSE) ===== */
 const APU={pres:{e:"6257",c:"0001",t:"Presidente"},gov:{e:"6259",c:"0003",uf:"pe",t:"Governador de PE"},sen:{e:"6259",c:"0005",uf:"pe",t:"Senado por PE"},df:{e:"6259",c:"0006",uf:"pe",t:"Deputado federal por PE"},de:{e:"6259",c:"0007",uf:"pe",t:"Deputado estadual por PE"}};
 const APB="https://resultados.tse.jus.br/oficial/ele2026/";
-let apuK="gov",apuUF="br",apuQ="",apuOnly=false,apuN=40,apuT=null,apuData={},apuErr={},apuBusy=false;
+let apuView="list",apuK="gov",apuUF="br",apuQ="",apuOnly=false,apuN=40,apuT=null,apuData={},apuErr={},apuBusy=false;
 const apuUrl=k=>{const a=APU[k],uf=k==="pres"?apuUF:a.uf;return APB+a.e+"/dados/"+uf+"/"+uf+"-c"+a.c+"-e00"+a.e+"-u.json"};
 const apuFoto=(k,sq)=>{const a=APU[k],uf=k==="pres"?"br":a.uf;return APB+a.e+"/fotos/"+uf+"/"+sq+".jpeg"};
 const nBR=v=>Number(v||0).toLocaleString("pt-BR");
@@ -1508,11 +1518,65 @@ async function apuLoad(){const key=apuK+(apuK==="pres"?apuUF:"");if(apuBusy)retu
  apuBusy=false;apuRender()}
 function apuStatus(t){const b=$("#apu-st");if(b&&t==="carregando"&&!b.innerHTML)b.innerHTML='<p class="cnote">Carregando dados do TSE…</p>'}
 function apuStart(){apuSeg();apuLoad();clearInterval(apuT);apuT=setInterval(()=>{if(office==="apu"&&!document.hidden)apuLoad()},30000)}
-function apuStop(){clearInterval(apuT);apuT=null}
+function apuStop(){clearInterval(apuT);apuT=null;clearInterval(mapT)}
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&office==="apu")apuLoad()});
 function apuSeg(){document.querySelectorAll("#apu-g button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===apuK))}
 document.querySelectorAll("#apu-g button").forEach(b=>b.onclick=()=>{apuK=b.dataset.k;apuQ="";apuOnly=false;apuN=40;apuSeg();const key=apuK+(apuK==="pres"?apuUF:"");if(apuData[key])apuRender();apuLoad()});
 function apuSafe(all,i,seats,R){const vi=all[i].v;const d=all.filter((_,j)=>j!==i).map(o=>Math.max(0,vi-o.v+1)).sort((a,b)=>a-b);let need=0;for(let k=0;k<seats;k++)need+=d[k]===undefined?Infinity:d[k];return need>R}
+
+/* ===== Mapa de calor (TSE + IBGE) ===== */
+const UFI={11:"ro",12:"ac",13:"am",14:"rr",15:"pa",16:"ap",17:"to",21:"ma",22:"pi",23:"ce",24:"rn",25:"pb",26:"pe",27:"al",28:"se",29:"ba",31:"mg",32:"es",33:"rj",35:"sp",41:"pr",42:"sc",43:"rs",50:"ms",51:"mt",52:"go",53:"df"};
+const UFN={ro:"Rondônia",ac:"Acre",am:"Amazonas",rr:"Roraima",pa:"Pará",ap:"Amapá",to:"Tocantins",ma:"Maranhão",pi:"Piauí",ce:"Ceará",rn:"Rio Grande do Norte",pb:"Paraíba",pe:"Pernambuco",al:"Alagoas",se:"Sergipe",ba:"Bahia",mg:"Minas Gerais",es:"Espírito Santo",rj:"Rio de Janeiro",sp:"São Paulo",pr:"Paraná",sc:"Santa Catarina",rs:"Rio Grande do Sul",ms:"Mato Grosso do Sul",mt:"Mato Grosso",go:"Goiás",df:"Distrito Federal"};
+const MPAL=["#2f6fdb","#e0592f","#16a085","#d4a017","#8e5ad8","#d64596","#6b7a8f","#7a9a1d","#b5651d","#3aa0c8","#a33b3b","#5c5c9e"];
+let mapMode="lead",mapCand=null,mapLvl=null,mapUF="pe",mapSel=null,mapQ="",mapT=null;
+const MAP={geo:{},res:{},cfg:null,busy:{},prog:{}};
+async function mapGeo(k){if(MAP.geo[k])return MAP.geo[k];const u=k==="br"?"https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo%2Bjson&intrarregiao=UF&qualidade=minima":"https://servicodados.ibge.gov.br/api/v3/malhas/estados/"+Object.keys(UFI).find(c=>UFI[c]===k)+"?formato=application/vnd.geo%2Bjson&intrarregiao=municipio&qualidade=minima";const j=await (await fetch(u)).json();MAP.geo[k]=j;return j}
+async function mapCfg(){if(MAP.cfg)return MAP.cfg;const j=await (await fetch(APB+"6257/config/mun-e006257-cm.json")).json();const m={};j.abr.forEach(a=>m[a.cd]=(a.mu||[]).map(x=>({cd:x.cd,cdi:x.cdi,nm:x.nm})));MAP.cfg=m;return m}
+const mapKey=()=>apuK+"|"+mapLvl+"|"+(mapLvl==="br"?"":mapUF);
+function mapSum(j){const all=apuFlat(j).filter(x=>x.v>0||1).sort((a,b)=>b.v-a.v);return{pst:+String((j.s&&(j.s.pstn||j.s.pst))||"0").replace(",","."),c:all.map(x=>({n:x.n,nm:x.nm,sg:x.sg,v:x.v,pn:x.pn}))}}
+async function mapFetch(force){const A=APU[apuK],key=mapKey();if(MAP.busy[key])return;const old=MAP.res[key];if(old&&!force&&Date.now()-old.t<90000)return;MAP.busy[key]=true;
+ try{let areas;if(mapLvl==="br"){areas=Object.values(UFI).map(uf=>({id:uf,url:APB+A.e+"/dados/"+uf+"/"+uf+"-c"+A.c+"-e00"+A.e+"-u.json"}))}
+  else{const cfg=await mapCfg();areas=(cfg[mapUF]||[]).map(m=>({id:m.cdi,nm:m.nm,url:APB+A.e+"/dados/"+mapUF+"/"+mapUF+m.cd+"-c"+A.c+"-e00"+A.e+"-u.json"}))}
+  const out=old?{...old.d}:{},names={};let done=0;MAP.prog[key]=[0,areas.length];
+  const q=[...areas];const work=async()=>{while(q.length){const a=q.shift();try{const r=await fetch(a.url+"?t="+Date.now(),{cache:"no-store"});if(r.ok)out[a.id]=mapSum(await r.json())}catch(e){}if(a.nm)names[a.id]=a.nm;done++;MAP.prog[key]=[done,areas.length];if(done%20===0&&$("#apu-map"))mapDraw()}};
+  await Promise.all(Array.from({length:8},work));MAP.res[key]={t:Date.now(),d:out,names:Object.keys(names).length?names:(old&&old.names)||{}}}
+ finally{MAP.busy[key]=false;delete MAP.prog[key]}
+ if($("#apu-map"))mapDraw()}
+async function mapShow(){if(!mapLvl||(apuK!=="pres"&&mapLvl==="br"))mapLvl=apuK==="pres"?"br":"uf";if(apuK!=="pres")mapUF="pe";
+ mapDraw();try{await mapGeo(mapLvl==="br"?"br":mapUF)}catch(e){$("#apu-map").innerHTML='<div class="panel ap-err"><b>Não consegui carregar o mapa do IBGE.</b><p>Tente de novo em instantes.</p></div>';return}
+ mapDraw();mapFetch();clearInterval(mapT);mapT=setInterval(()=>{if(office==="apu"&&apuView==="map"&&!document.hidden&&$("#apu-map"))mapFetch()},90000)}
+function mapPath(g,P){const ring=r=>r.map((c,i)=>(i?"L":"M")+P(c).join(",")).join("")+"Z";if(g.type==="Polygon")return g.coordinates.map(ring).join("");if(g.type==="MultiPolygon")return g.coordinates.map(p=>p.map(ring).join("")).join("");return ""}
+function mapDark(){const t=document.documentElement.getAttribute("data-theme");return t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches}
+function heat(f){const d=mapDark();const l=d?18+f*52:94-f*66,sat=d?55:62;return `hsl(158 ${sat}% ${l.toFixed(1)}%)`}
+function mapDraw(){const M=$("#apu-map");if(!M)return;const gk=mapLvl==="br"?"br":mapUF,geo=MAP.geo[gk],key=mapKey(),R=MAP.res[key],data=R?R.d:{},names=R?R.names:{},prog=MAP.prog[key];
+ const overall=(apuData[apuK+(apuK==="pres"?apuUF:"")]);const cands=overall?apuFlat(overall).sort((a,b)=>b.v-a.v):[];
+ const col={};cands.forEach((c,i)=>col[c.n]=MPAL[i%MPAL.length]);if(!mapCand||!cands.find(c=>c.n===mapCand))mapCand=cands[0]?cands[0].n:null;
+ const A=APU[apuK];
+ let head=`<div class="mp-bar"><div class="seg apseg" role="group" aria-label="Modo do mapa"><button data-m="lead" aria-pressed="${mapMode==="lead"}">Quem lidera</button><button data-m="heat" aria-pressed="${mapMode==="heat"}">Calor de um candidato</button></div>${mapMode==="heat"?`<select id="mp-cand" aria-label="Candidato">${cands.map(c=>`<option value="${c.n}" ${c.n===mapCand?"selected":""}>${esc(c.nm)} (${esc(c.sg)})</option>`).join("")}</select>`:""}</div>
+ <div class="mp-lvl">${apuK==="pres"&&mapLvl==="uf"?`<button class="ap-btn" id="mp-back" type="button">← Brasil</button>`:""}<b>${mapLvl==="br"?"Brasil, por estado":esc(UFN[mapUF]||mapUF)+", por município"}</b>${mapLvl==="uf"?`<input id="mp-q" type="search" placeholder="Buscar cidade" aria-label="Buscar cidade" value="${esc(mapQ)}" list="mp-dl"><datalist id="mp-dl">${Object.values(names).sort().map(n=>`<option value="${esc(n)}">`).join("")}</datalist>`:""}<button class="ap-btn" id="mp-ref" type="button">Atualizar mapa</button></div>
+ ${prog?`<p class="cnote mp-prog">Carregando resultados do TSE: ${prog[0]} de ${prog[1]} ${mapLvl==="br"?"estados":"municípios"}…</p>`:""}`;
+ if(!geo){M.innerHTML=head+'<p class="cnote">Carregando mapa do IBGE…</p>';mapBind();return}
+ const feats=geo.features;let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;const each=(g,f)=>{const w=r=>r.forEach(f);if(g.type==="Polygon")g.coordinates.forEach(w);else g.coordinates.forEach(p=>p.forEach(w))};
+ feats.forEach(ft=>each(ft.geometry,c=>{if(c[0]<x0)x0=c[0];if(c[0]>x1)x1=c[0];if(c[1]<y0)y0=c[1];if(c[1]>y1)y1=c[1]}));
+ const k=Math.cos((y0+y1)/2*Math.PI/180),W=1000,sc=W/((x1-x0)*k),H=Math.max(200,(y1-y0)*sc),P=c=>[((c[0]-x0)*k*sc).toFixed(1),((y1-c[1])*sc).toFixed(1)];
+ let mx=0;if(mapMode==="heat")Object.values(data).forEach(d=>{const c=d.c.find(c=>c.n===mapCand);if(c&&c.pn>mx)mx=c.pn});
+ const idOf=ft=>mapLvl==="br"?UFI[ft.properties.codarea]:ft.properties.codarea;
+ const fillOf=id=>{const d=data[id];if(!d||!d.c.length||d.c[0].v===0)return["var(--sunk)",1];if(mapMode==="lead"){const a=d.c[0],b=d.c[1];const mg=b?a.pn-b.pn:100;return[col[a.n]||"#888",Math.min(1,.38+mg/40)]}const c=d.c.find(c=>c.n===mapCand);return[heat(c&&mx?c.pn/mx:0),1]};
+ const wins={};if(mapMode==="lead")Object.values(data).forEach(d=>{if(d.c[0]&&d.c[0].v>0)wins[d.c[0].n]=(wins[d.c[0].n]||0)+1});
+ const paths=feats.map(ft=>{const id=idOf(ft),[f,o]=fillOf(id);return `<path d="${mapPath(ft.geometry,P)}" data-id="${id}" class="mp-a${String(mapSel)===String(id)?" on":""}" style="fill:${f};fill-opacity:${o}"><title>${esc(mapLvl==="br"?UFN[id]||id:names[id]||id)}</title></path>`}).join("");
+ const sel=mapSel!=null?data[mapSel]:null,selNm=mapSel==null?"":(mapLvl==="br"?UFN[mapSel]:names[mapSel])||mapSel;
+ const info=sel?`<div class="mp-info"><div class="mp-ih"><b>${esc(selNm)}</b><span>${pBR(sel.pst.toFixed(2))}% das seções</span></div>${sel.c.slice(0,apuK==="sen"?4:3).map(c=>`<div class="mp-ir"><i style="background:${col[c.n]||"#888"}"></i><span>${esc(c.nm)} <small>${esc(c.sg)}</small></span><b>${pBR(c.pn.toFixed(2))}%</b></div>`).join("")}${mapLvl==="br"?`<button class="ap-btn" id="mp-drill" type="button">Ver municípios de ${esc(selNm)}</button>`:""}</div>`:`<p class="cnote mp-hint">${mapLvl==="br"?"Toque num estado para ver o resultado e abrir os municípios.":"Toque numa cidade (ou busque pelo nome) para ver o resultado."}</p>`;
+ const leg=mapMode==="lead"?`<div class="mp-leg">${cands.filter(c=>wins[c.n]).map(c=>`<span><i style="background:${col[c.n]}"></i>${esc(c.nm)} <small>lidera em ${wins[c.n]}</small></span>`).join("")}<small class="mp-note">Cor mais forte = vantagem maior sobre o 2º colocado. Cinza = sem dados ainda.</small></div>`:`<div class="mp-leg"><div class="mp-grad" style="background:linear-gradient(90deg,${heat(0)},${heat(.5)},${heat(1)})"></div><div class="mp-gl"><small>0%</small><small>${pBR(mx.toFixed(1))}% dos válidos</small></div></div>`;
+ M.innerHTML=head+`<div class="mp-wrap"><svg viewBox="0 0 ${W} ${H.toFixed(0)}" role="img" aria-label="Mapa de resultados">${paths}</svg></div>`+info+leg+`<p class="cnote">Fontes: TSE (resultados por ${mapLvl==="br"?"estado":"município"}) e IBGE (malhas). O mapa atualiza a cada 90 segundos.</p>`;
+ mapBind()}
+function mapBind(){const M=$("#apu-map");if(!M)return;
+ M.querySelectorAll(".mp-bar [data-m]").forEach(b=>b.onclick=()=>{mapMode=b.dataset.m;mapDraw()});
+ const cs=$("#mp-cand");if(cs)cs.onchange=()=>{mapCand=cs.value;mapDraw()};
+ const bk=$("#mp-back");if(bk)bk.onclick=()=>{mapLvl="br";mapSel=mapUF;mapQ="";mapShow()};
+ const rf=$("#mp-ref");if(rf)rf.onclick=()=>mapFetch(true);
+ const dr=$("#mp-drill");if(dr)dr.onclick=()=>{mapUF=mapSel;mapLvl="uf";mapSel=null;mapQ="";mapShow()};
+ const q=$("#mp-q");if(q)q.onchange=q.oninput=()=>{mapQ=q.value;const R=MAP.res[mapKey()];if(!R)return;const N=x=>String(x).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim();const t=N(mapQ);if(t.length<3)return;const id=Object.keys(R.names).find(k=>N(R.names[k])===t);if(id&&String(id)!==String(mapSel)){mapSel=id;mapDraw();const s2=$("#mp-q");if(s2){s2.focus();const L=s2.value.length;try{s2.setSelectionRange(L,L)}catch(e){}}}};
+ M.querySelectorAll(".mp-a").forEach(p=>{p.onclick=()=>{mapSel=p.dataset.id;mapDraw()}})}
 function apuRender(){
  const key=apuK+(apuK==="pres"?apuUF:""),j=apuData[key],err=apuErr[key],A=APU[apuK],ST=$("#apu-st"),BD=$("#apu-body");
  if(!j){ST.innerHTML="";BD.innerHTML=err?`<div class="panel ap-err"><b>Não consegui ler os dados do TSE agora.</b><p>${/HTTP 404/.test(err)?"O TSE ainda não publicou o arquivo deste cargo.":"O navegador não conseguiu acessar o site de resultados ("+esc(err)+")."} Se você está vendo esta página dentro do Claude, abra a versão pública em <a href="https://sebastrogers.github.io/urna-aberta-pe-2026/#apuracao" target="_blank" rel="noopener">sebastrogers.github.io/urna-aberta-pe-2026</a>, ou acompanhe em <a href="https://resultados.tse.jus.br/" target="_blank" rel="noopener">resultados.tse.jus.br</a>.</p><button class="ap-btn" id="apu-retry" type="button">Tentar de novo</button></div>`:'<p class="cnote">Carregando dados do TSE…</p>';const rb=$("#apu-retry");if(rb)rb.onclick=apuLoad;return}
@@ -1540,7 +1604,8 @@ function apuRender(){
    return ["no",""]};
   const lead=all[0]?sit(all[0],0):null;
   html+=lead?`<div class="ap-sum ap-${lead[0]}"><span class="ap-sum-k">Se a apuração terminasse agora</span><b>${apuK==="sen"?esc(all[0].nm)+" e "+esc(all[1]?all[1].nm:"")+" seriam eleitos":(all[0].pn>50||tse(all[0])?esc(all[0].nm)+" seria eleito(a) no 1º turno":"Haveria 2º turno entre "+esc(all[0].nm)+" e "+esc(all[1]?all[1].nm:""))}</b><span>${esc(lead[1])}. Faltam ${nBR(Rv)} eleitores em seções ainda não totalizadas (${pBR((100-pstn).toFixed(2))}% das seções).</span></div>`:"";
-  html+=`<p class="cnote">${apuK==="sen"?"Duas vagas em 2026: elegem-se os 2 mais votados, sem 2º turno.":"Para vencer no 1º turno é preciso mais de 50% dos votos válidos. Se ninguém passar, os dois primeiros vão ao 2º turno em 25/10."} Percentuais sobre votos válidos.</p>
+  html+=`<div class="seg apseg ap-view" role="group" aria-label="Visualização"><button data-v="list" aria-pressed="${apuView!=="map"}">Lista</button><button data-v="map" aria-pressed="${apuView==="map"}">Mapa</button></div>`;
+  if(apuView==="map")html+=`<div id="apu-map"></div>`;else html+=`<p class="cnote">${apuK==="sen"?"Duas vagas em 2026: elegem-se os 2 mais votados, sem 2º turno.":"Para vencer no 1º turno é preciso mais de 50% dos votos válidos. Se ninguém passar, os dois primeiros vão ao 2º turno em 25/10."} Percentuais sobre votos válidos.</p>
   <ol class="ap-maj">${all.map((x,i)=>`<li class="${i<(apuK==="sen"?2:1)?"lead":""}"><span class="ap-pos">${i+1}º</span><span class="av ap-av"><b>${esc((x.nm||"?").split(" ").filter(w=>w.length>2).slice(0,2).map(w=>w[0]).join(""))}</b><img src="${apuFoto(apuK,x.sq)}" alt="" loading="lazy" onload="this.parentNode.classList.add('ph')" onerror="this.remove()"></span><div class="ap-main"><div class="ap-nm"><b>${esc(x.nm)}</b><small>${esc(x.sg)} · ${esc(x.n)}</small>${badge(x)}${sj(x)}${linkOf(x)}</div><div class="ap-row"><div class="ap-track">${apuK!=="sen"?'<em class="ap-50" title="50%"></em>':""}<i style="width:${Math.max(.4,x.pn)}%"></i></div><b class="ap-pc">${pBR(x.p)}%</b></div><small class="ap-vt">${nBR(x.v)} votos</small>${(()=>{const t=sit(x,i);return t[1]?`<span class="ap-sit ap-${t[0]}">${t[0]==="ok"?"✓ ":""}${esc(t[1])}</span>`:""})()}</div></li>`).join("")}</ol>`;
  } else {
   const vagas=apuK==="df"?25:49,anyE=all.some(x=>x.e==="s"||/eleit/i.test(x.st)),QE=(+(v.vv||0))/vagas||1,topG={};all.forEach(x=>{if(!(x.g in topG))topG[x.g]=x});
@@ -1558,6 +1623,8 @@ function apuRender(){
  html+=`<p class="cnote">Fonte: TSE, <a href="https://resultados.tse.jus.br/" target="_blank" rel="noopener">resultados.tse.jus.br</a>. Arquivo oficial lido a cada 30 segundos; números podem mudar até a totalização final.</p>`;
  const focusQ=document.activeElement&&document.activeElement.id==="apu-q",cp=focusQ?document.activeElement.selectionStart:0;
  BD.innerHTML=html;
+ BD.querySelectorAll(".ap-view button").forEach(b=>b.onclick=()=>{apuView=b.dataset.v;apuRender()});
+ if(apuView==="map"&&$("#apu-map"))mapShow();
  BD.querySelectorAll(".ap-uf button").forEach(b=>b.onclick=()=>{apuUF=b.dataset.uf;const k2="pres"+apuUF;if(apuData[k2])apuRender();apuLoad()});
  const q=$("#apu-q");if(q){q.oninput=()=>{apuQ=q.value;apuN=40;apuRender()};if(focusQ){q.focus();try{q.setSelectionRange(cp,cp)}catch(e){}}}
  const oc=$("#apu-only");if(oc)oc.onchange=()=>{apuOnly=oc.checked;apuRender()};
