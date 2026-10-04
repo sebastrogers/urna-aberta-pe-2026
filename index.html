@@ -1559,7 +1559,7 @@ function mapDraw(){const M=$("#apu-map");if(!M)return;const gk=mapLvl==="br"?"br
  if(!geo){M.innerHTML=head+'<p class="cnote">Carregando mapa do IBGE…</p>';mapBind();return}
  const each=(g,f)=>{const w=r=>r.forEach(f);if(g.type==="Polygon")g.coordinates.forEach(w);else g.coordinates.forEach(p=>p.forEach(w))};
  const cen=ft=>{let sx=0,sy=0,n=0;each(ft.geometry,c=>{sx+=c[0];sy+=c[1];n++});return[sx/n,sy/n]};
- let feats=geo.features,outl=[];if(mapLvl==="uf"&&feats.length>3){const cs=feats.map(cen),mxs=[...cs.map(c=>c[0])].sort((a,b)=>a-b),mys=[...cs.map(c=>c[1])].sort((a,b)=>a-b),mdx=mxs[mxs.length>>1],mdy=mys[mys.length>>1];const keep=[];feats.forEach((f,i)=>{(Math.hypot(cs[i][0]-mdx,cs[i][1]-mdy)>6?outl:keep).push(f)});if(keep.length)feats=keep;else outl=[]}
+ let feats=geo.features,outl=[];if(mapLvl==="uf"&&feats.length>3){const cs=feats.map(cen);const nn=i=>{let m=1e9;cs.forEach((c,j)=>{if(j!==i){const d=Math.hypot(c[0]-cs[i][0],c[1]-cs[i][1]);if(d<m)m=d}});return m};const keep=[];feats.forEach((f,i)=>{(nn(i)>1.5?outl:keep).push(f)});if(keep.length)feats=keep;else outl=[]}
  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
  feats.forEach(ft=>each(ft.geometry,c=>{if(c[0]<x0)x0=c[0];if(c[0]>x1)x1=c[0];if(c[1]<y0)y0=c[1];if(c[1]>y1)y1=c[1]}));
  const k=Math.cos((y0+y1)/2*Math.PI/180),W=1000,sc=W/((x1-x0)*k),H=Math.max(200,(y1-y0)*sc),P=c=>[((c[0]-x0)*k*sc).toFixed(1),((y1-c[1])*sc).toFixed(1)];
