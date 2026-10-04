@@ -1517,7 +1517,7 @@ function apuRender(){
  ST.innerHTML=`<div class="panel ap-st"><div class="ap-prog"><div class="ap-ph"><b>${pst}%</b><span>das seções totalizadas</span></div><div class="ap-bar"><i style="width:${Math.min(100,pstn)}%"></i></div><div class="ap-meta"><span>${fin?"Totalização concluída":"Parcial"} · TSE ${esc(j.hg||"")} de ${esc(j.dg||"")}</span>${err?`<span class="ap-warn">Última tentativa falhou, mostrando o dado anterior</span>`:""}<button class="ap-btn" id="apu-now" type="button">Atualizar agora</button></div></div>
  <div class="ap-kpis"><div><span>Votos válidos</span><b>${nBR(v.vv)}</b></div><div><span>Brancos</span><b>${pBR(v.pvb)}%</b></div><div><span>Nulos</span><b>${pBR(v.ptvn)}%</b></div><div><span>Comparecimento</span><b>${j.e&&j.e.pc?pBR(j.e.pc)+"%":(j.e&&j.e.c?nBR(j.e.c):"—")}</b></div></div></div>`;
  $("#apu-now").onclick=()=>apuLoad();
- const linkOf=x=>{const m=SQMAP[x.sq];return m?`<button class="lnk ap-go" data-o="${m.o}" data-id="${m.id}">ver ficha</button>`:""};
+ const linkOf=x=>{let m=SQMAP[x.sq];if(!m&&(apuK==="gov"||apuK==="sen")){const c=C.find(c=>c.o===apuK&&c.num===String(x.n));if(c)m={o:c.o,id:c.id}}return m?`<button class="lnk ap-go" data-o="${m.o}" data-id="${m.id}">ver ficha</button>`:""};
  const badge=x=>x.e==="s"||/eleit/i.test(x.st)?`<span class="ap-b ok">${esc(x.st||"Eleito(a)")}</span>`:/2º turno|segundo turno/i.test(x.st)?`<span class="ap-b t2">2º turno</span>`:x.st&&!/não eleito|nao eleito/i.test(x.st)?`<span class="ap-b">${esc(x.st)}</span>`:"";
  const sj=x=>/anulad|sub judice|indefer/i.test(x.dvt)?`<span class="ap-b sj">${esc(x.dvt)}</span>`:"";
  let html="";
