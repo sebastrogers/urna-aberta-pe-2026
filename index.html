@@ -411,6 +411,7 @@ body{padding-bottom:72px}
 .mp-leg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13.5px;align-items:center}.mp-leg span{display:inline-flex;gap:6px;align-items:center}.mp-leg i{width:12px;height:12px;border-radius:3px;display:inline-block}.mp-leg small{color:var(--ink-2)}.mp-note{flex-basis:100%}
 .mp-grad{height:12px;border-radius:6px;flex-basis:100%}.mp-gl{display:flex;justify-content:space-between;flex-basis:100%}
 .mp-prog{font-weight:600}
+.mp-inset{fill:none;stroke:var(--line-2);stroke-dasharray:4 4}.mp-it{font:600 13px var(--sans);fill:var(--ink-2)}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -1556,18 +1557,23 @@ function mapDraw(){const M=$("#apu-map");if(!M)return;const gk=mapLvl==="br"?"br
  <div class="mp-lvl">${apuK==="pres"&&mapLvl==="uf"?`<button class="ap-btn" id="mp-back" type="button">← Brasil</button>`:""}<b>${mapLvl==="br"?"Brasil, por estado":esc(UFN[mapUF]||mapUF)+", por município"}</b>${mapLvl==="uf"?`<input id="mp-q" type="search" placeholder="Buscar cidade" aria-label="Buscar cidade" value="${esc(mapQ)}" list="mp-dl"><datalist id="mp-dl">${Object.values(names).sort().map(n=>`<option value="${esc(n)}">`).join("")}</datalist>`:""}<button class="ap-btn" id="mp-ref" type="button">Atualizar mapa</button></div>
  ${prog?`<p class="cnote mp-prog">Carregando resultados do TSE: ${prog[0]} de ${prog[1]} ${mapLvl==="br"?"estados":"municípios"}…</p>`:""}`;
  if(!geo){M.innerHTML=head+'<p class="cnote">Carregando mapa do IBGE…</p>';mapBind();return}
- const feats=geo.features;let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;const each=(g,f)=>{const w=r=>r.forEach(f);if(g.type==="Polygon")g.coordinates.forEach(w);else g.coordinates.forEach(p=>p.forEach(w))};
+ const each=(g,f)=>{const w=r=>r.forEach(f);if(g.type==="Polygon")g.coordinates.forEach(w);else g.coordinates.forEach(p=>p.forEach(w))};
+ const cen=ft=>{let sx=0,sy=0,n=0;each(ft.geometry,c=>{sx+=c[0];sy+=c[1];n++});return[sx/n,sy/n]};
+ let feats=geo.features,outl=[];if(mapLvl==="uf"&&feats.length>3){const cs=feats.map(cen),mxs=[...cs.map(c=>c[0])].sort((a,b)=>a-b),mys=[...cs.map(c=>c[1])].sort((a,b)=>a-b),mdx=mxs[mxs.length>>1],mdy=mys[mys.length>>1];const keep=[];feats.forEach((f,i)=>{(Math.hypot(cs[i][0]-mdx,cs[i][1]-mdy)>6?outl:keep).push(f)});if(keep.length)feats=keep;else outl=[]}
+ let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
  feats.forEach(ft=>each(ft.geometry,c=>{if(c[0]<x0)x0=c[0];if(c[0]>x1)x1=c[0];if(c[1]<y0)y0=c[1];if(c[1]>y1)y1=c[1]}));
  const k=Math.cos((y0+y1)/2*Math.PI/180),W=1000,sc=W/((x1-x0)*k),H=Math.max(200,(y1-y0)*sc),P=c=>[((c[0]-x0)*k*sc).toFixed(1),((y1-c[1])*sc).toFixed(1)];
+ const inset=outl.map((ft,oi)=>{let a=1e9,b=-1e9,c0=1e9,d=-1e9;each(ft.geometry,c=>{if(c[0]<a)a=c[0];if(c[0]>b)b=c[0];if(c[1]<c0)c0=c[1];if(c[1]>d)d=c[1]});const box=Math.min(120,H*.4),s2=box/Math.max((b-a)*k,(d-c0),1e-6),ox=W-box-10-oi*(box+14),oy=10;return{ft,P:c=>[(ox+(c[0]-a)*k*s2).toFixed(1),(oy+(d-c[1])*s2).toFixed(1)],ox,oy,box}});
  let mx=0;if(mapMode==="heat")Object.values(data).forEach(d=>{const c=d.c.find(c=>c.n===mapCand);if(c&&c.pn>mx)mx=c.pn});
  const idOf=ft=>mapLvl==="br"?UFI[ft.properties.codarea]:ft.properties.codarea;
  const fillOf=id=>{const d=data[id];if(!d||!d.c.length||d.c[0].v===0)return["var(--sunk)",1];if(mapMode==="lead"){const a=d.c[0],b=d.c[1];const mg=b?a.pn-b.pn:100;return[col[a.n]||"#888",Math.min(1,.38+mg/40)]}const c=d.c.find(c=>c.n===mapCand);return[heat(c&&mx?c.pn/mx:0),1]};
  const wins={};if(mapMode==="lead")Object.values(data).forEach(d=>{if(d.c[0]&&d.c[0].v>0)wins[d.c[0].n]=(wins[d.c[0].n]||0)+1});
- const paths=feats.map(ft=>{const id=idOf(ft),[f,o]=fillOf(id);return `<path d="${mapPath(ft.geometry,P)}" data-id="${id}" class="mp-a${String(mapSel)===String(id)?" on":""}" style="fill:${f};fill-opacity:${o}"><title>${esc(mapLvl==="br"?UFN[id]||id:names[id]||id)}</title></path>`}).join("");
+ const pth=(ft,PP)=>{const id=idOf(ft),[f,o]=fillOf(id);return `<path d="${mapPath(ft.geometry,PP)}" data-id="${id}" class="mp-a${String(mapSel)===String(id)?" on":""}" style="fill:${f};fill-opacity:${o}"><title>${esc(mapLvl==="br"?UFN[id]||id:names[id]||id)}</title></path>`};
+ const paths=feats.map(ft=>pth(ft,P)).join("")+inset.map(t=>`<rect x="${t.ox-6}" y="${t.oy-6}" width="${t.box+12}" height="${t.box+12}" rx="8" class="mp-inset"/>${pth(t.ft,t.P)}<text x="${t.ox+t.box/2}" y="${t.oy+t.box+22}" text-anchor="middle" class="mp-it">${esc(names[idOf(t.ft)]||"")}</text>`).join("");
  const sel=mapSel!=null?data[mapSel]:null,selNm=mapSel==null?"":(mapLvl==="br"?UFN[mapSel]:names[mapSel])||mapSel;
  const info=sel?`<div class="mp-info"><div class="mp-ih"><b>${esc(selNm)}</b><span>${pBR(sel.pst.toFixed(2))}% das seções</span></div>${sel.c.slice(0,apuK==="sen"?4:3).map(c=>`<div class="mp-ir"><i style="background:${col[c.n]||"#888"}"></i><span>${esc(c.nm)} <small>${esc(c.sg)}</small></span><b>${pBR(c.pn.toFixed(2))}%</b></div>`).join("")}${mapLvl==="br"?`<button class="ap-btn" id="mp-drill" type="button">Ver municípios de ${esc(selNm)}</button>`:""}</div>`:`<p class="cnote mp-hint">${mapLvl==="br"?"Toque num estado para ver o resultado e abrir os municípios.":"Toque numa cidade (ou busque pelo nome) para ver o resultado."}</p>`;
  const leg=mapMode==="lead"?`<div class="mp-leg">${cands.filter(c=>wins[c.n]).map(c=>`<span><i style="background:${col[c.n]}"></i>${esc(c.nm)} <small>lidera em ${wins[c.n]}</small></span>`).join("")}<small class="mp-note">Cor mais forte = vantagem maior sobre o 2º colocado. Cinza = sem dados ainda.</small></div>`:`<div class="mp-leg"><div class="mp-grad" style="background:linear-gradient(90deg,${heat(0)},${heat(.5)},${heat(1)})"></div><div class="mp-gl"><small>0%</small><small>${pBR(mx.toFixed(1))}% dos válidos</small></div></div>`;
- M.innerHTML=head+`<div class="mp-wrap"><svg viewBox="0 0 ${W} ${H.toFixed(0)}" role="img" aria-label="Mapa de resultados">${paths}</svg></div>`+info+leg+`<p class="cnote">Fontes: TSE (resultados por ${mapLvl==="br"?"estado":"município"}) e IBGE (malhas). O mapa atualiza a cada 90 segundos.</p>`;
+ M.innerHTML=head+`<div class="mp-wrap"><svg viewBox="0 0 ${W} ${(H+(inset.length&&inset[0].box+40>H?inset[0].box+40-H:0)).toFixed(0)}" role="img" aria-label="Mapa de resultados">${paths}</svg></div>`+info+leg+`<p class="cnote">Fontes: TSE (resultados por ${mapLvl==="br"?"estado":"município"}) e IBGE (malhas). O mapa atualiza a cada 90 segundos.</p>`;
  mapBind()}
 function mapBind(){const M=$("#apu-map");if(!M)return;
  M.querySelectorAll(".mp-bar [data-m]").forEach(b=>b.onclick=()=>{mapMode=b.dataset.m;mapDraw()});
